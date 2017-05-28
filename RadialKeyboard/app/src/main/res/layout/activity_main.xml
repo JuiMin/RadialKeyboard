@@ -8,58 +8,91 @@
     tools:context="edu.washington.derek.radialkeyboard.MainActivity">
 
     <LinearLayout
-        android:layout_width="120dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="46dp"
+        tools:layout_editor_absoluteY="44dp">
 
         <EditText
             android:id="@+id/input_area"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:text=""
             android:textSize="8dp"
-            android:text="hello"
-            tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="0dp" />
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="-37dp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="0dp">
+        <Button
+            android:id="@+id/button"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
 
-            <Button
-                android:id="@+id/top_button"
+            android:layout_toLeftOf="@+id/center_button"
+            android:layout_toStartOf="@+id/center_button"
+            android:background="@drawable/round_button"
+            android:text="A"
+            android:textSize="4dp" />
+
+        <Button
+                android:id="@+id/button_nine"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:textSize="8dp"
-                android:textAlignment="center"
-                android:text="R"
-                android:layout_centerInParent="true"/>
+                android:background="@drawable/round_button"
+
+                android:text="A"
+                android:textSize="4dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/center_button"
+                android:layout_toStartOf="@+id/center_button" />
 
             <Button
-                android:id="@+id/top_right_button"
+                android:id="@+id/button_two"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:textSize="8dp"
-                android:textAlignment="center"
-                android:text="R"
-                android:layout_alignParentRight="true"/>
+                android:background="@drawable/round_button"
+                android:text="B"
+                android:textSize="4dp"
+                android:layout_alignRight="@+id/center_button"
+                android:layout_alignEnd="@+id/center_button" />
+
 
             <Button
                 android:id="@+id/top_left_button"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:background="@drawable/round_button"
+                android:text="Shift"
+                android:textSize="4dp"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/button_nine"
+                android:layout_toStartOf="@+id/button_nine" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/round_button"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="A"
+                android:textColor="#fff"
                 android:textSize="8dp"
-                android:textAlignment="center"
-                android:text="R"
-                android:layout_alignParentLeft="true"/>
-
-
-        </RelativeLayout>
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/button_nine" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/center_button"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignTop="@+id/button"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/round_button"
+        android:text="A"
+        android:textSize="4dp"
+        tools:layout_editor_absoluteX="88dp"
+        tools:layout_editor_absoluteY="94dp" />
 
 
-
-    
 </android.support.constraint.ConstraintLayout>

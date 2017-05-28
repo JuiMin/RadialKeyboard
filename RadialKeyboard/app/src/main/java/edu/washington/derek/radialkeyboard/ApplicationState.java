@@ -5,6 +5,9 @@ import android.app.Application;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Created by derek on 5/27/17.
  */
@@ -23,8 +26,17 @@ class ApplicationState extends Application {
     private boolean shiftOn;
 
     // This value is the index for the currently displayed layout
-    // 0 =
     private int currentLayout;
+
+    // Holds the inputs in order
+    Queue<String> outputs;
+
+    // boolean showing if the input is on
+    // This will be always on for symbols and numbers but if defauled to off during text
+    private boolean creatingString;
+
+    // Current Sentence
+    private StringBuffer sb;
 
     private ApplicationState() {
         // Check if the instance has been initialized, if it already exists do nothing
@@ -32,11 +44,17 @@ class ApplicationState extends Application {
             // Set the layout display to be the default (1 is the english Alphabet)
             currentLayout = 1;
 
+            // Initialize the String Buffer
+            sb = new StringBuffer();
+
             // Default shift to off
             shiftOn = false;
 
             // Import the layout schemes from file into a JSON Array
+            creatingString = false;
 
+            // Initialize the output queue
+            outputs = new LinkedList<String>();
 
         }
     }
@@ -51,12 +69,33 @@ class ApplicationState extends Application {
         currentLayout = index;
     }
 
-    public boolean getShiftOn() {
+    public boolean getShiftStatus() {
         return shiftOn;
     }
 
     // Turn shift off or on
     public void toggleShift() {
         shiftOn = !shiftOn;
+    }
+
+    // Add a character from the string buffer
+    public void addCharacter(char inputChar) {
+        sb.append(inputChar);
+    }
+
+    // Remove a character from the string buffer
+    public void deleteCharacter() {
+        sb.setLength(Math.max(sb.length() - 1, 0));
+    }
+
+    // Submits the current string as the final sentence
+    public void submitString() {
+        outputs.add(sb.toString());
+        sb.setLength(0);
+    }
+
+    // Get the sentence made by the string buffer
+    public String getSentence() {
+        return sb.toString();
     }
 }

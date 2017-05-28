@@ -18,16 +18,44 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Get the Edit Text so that we can update the text field
-        EditText input = (EditText)findViewById(R.id.input_area);
+        final EditText input = (EditText)findViewById(R.id.input_area);
 
+        // On create, get an instance of the state
+        // Extends application should run on application start so this information should be fine
+        final ApplicationState state = ApplicationState.getInstance();
 
         // Set the button listeners
 
         Button topLeft = (Button)findViewById(R.id.top_left_button);
-        topLeft.setOnTouchListener(new View.OnTouchListener() {
+        topLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // This button should toggle the shift
+                state.toggleShift();
+                if (state.getShiftStatus()) {
+                    input.setText("Shift On");
+                } else {
+                    input.setText("Shift Off");
+                }
+            }
+        });
+
+        // This button will always be the enter button
+        Button topRight = (Button)findViewById(R.id.top_right_button);
+        topRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Enter/Submit the sentence
+                state.submitString();
+                // The string buffer should have been reset so we can update the edit text
+                input.setText(state.getSentence());
+            }
+        });
+
+        Button button_one = (Button)findViewById(R.id.button_one);
+        button_one.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                // Update the
 
                 return false;
             }
@@ -36,10 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
         Log.i(TAG, "Keyboard Main Activity successfully created");
     }
-
 
     // Life Cycle Methods
 
