@@ -117,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 selectedLayout = "alphabet";
             }
-            input.setText(selectedLayout);
             setButtons(layouts.getJSONObject(selectedLayout));
 
 
@@ -143,8 +142,7 @@ public class MainActivity extends AppCompatActivity {
         Button button_nine = (Button)findViewById(R.id.button_nine);
         Button button_center = (Button)findViewById(R.id.center_button);
 
-        // Set the button on touch listeners
-        String text = layout.getJSONArray("button_one").get(0).toString();
+        // Set the button text
         button_one.setText(layout.getJSONArray("button_one").get(0).toString());
         button_two.setText(layout.getJSONArray("button_two").get(0).toString());
         button_three.setText(layout.getJSONArray("button_three").get(0).toString());
@@ -156,8 +154,7 @@ public class MainActivity extends AppCompatActivity {
         button_nine.setText(layout.getJSONArray("button_nine").get(0).toString());
         button_center.setText(layout.getJSONArray("button_center").get(0).toString());
 
-        // setContentView(R.layout.activity_main);
-
+        // Get the secondary buttons
         TextView button_one_left = (TextView)findViewById(R.id.button_one_left);
         TextView button_one_right = (TextView)findViewById(R.id.button_one_right);
         TextView button_two_left = (TextView)findViewById(R.id.button_two_left);
@@ -177,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
         TextView button_nine_left = (TextView)findViewById(R.id.button_nine_left);
         TextView button_nine_right = (TextView)findViewById(R.id.button_nine_right);
 
+        // Set secondary button visibility and text
         if ((boolean)layout.get("small_button_visible")) {
             // Set the smaller text buttons to visible and set the text
             button_one_left.setVisibility(View.VISIBLE);
@@ -320,7 +318,45 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case (MotionEvent.ACTION_UP) :
                 Log.d(TAG,"Action was UP");
+                try {
+                    // Get an instance of the state
+                    ApplicationState state = ApplicationState.getInstance();
 
+                    // Get reference to the edit text
+                    EditText input = (EditText)findViewById(R.id.input_area);
+
+                    // Load the JSON from file
+                    JSONObject obj = new JSONObject(loadJSONFromAsset());
+                    // If the JSON Loaded Correctly, populate the buttons
+                    JSONObject layouts = obj.getJSONObject("layouts");
+
+                    // Test the state for current layout selection
+                    String selectedLayout = "";
+                    int current = state.getCurrentLayout();
+                    // update the state with the new layout selection
+                    if (current < 2) {
+                        state.setCurrentLayout(current + 1);
+                        current = current + 1;
+                    } else {
+                        state.setCurrentLayout(0);
+                        current = 0;
+                    }
+                    // Get the json value for the layout selection
+                    if (current == 1) {
+                        selectedLayout = "symbols";
+                    } else if (current == 2) {
+                        selectedLayout = "numbers";
+                    } else {
+                        selectedLayout = "alphabet";
+                    }
+
+                    // Rerender the buttons
+                    input.setText(selectedLayout);
+                    setButtons(layouts.getJSONObject(selectedLayout));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 // System.exit(0);
                 return true;
             case (MotionEvent.ACTION_CANCEL) :
