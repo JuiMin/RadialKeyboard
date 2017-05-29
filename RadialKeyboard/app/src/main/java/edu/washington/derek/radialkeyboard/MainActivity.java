@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         // Get the Edit Text so that we can update the text field
         final EditText input = (EditText)findViewById(R.id.input_area);
 
-        // Should remove the keyboard
+        // Should remove the keyboard without getting rid of the cursor
         input.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
@@ -66,9 +66,35 @@ public class MainActivity extends AppCompatActivity {
                 state.submitString();
                 // The string buffer should have been reset so we can update the edit text
                 input.setText(state.getSentence());
+                input.setSelection(state.getSentence().length());
             }
         });
 
+        // This button will always be backspace
+        Button bottomLeft = (Button)findViewById(R.id.bottom_left_button);
+        bottomLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Backspace
+                state.deleteCharacter();
+                input.setText(state.getSentence());
+                input.setSelection(state.getSentence().length());
+            }
+        });
+
+        // This button will always be spacebar
+        Button bottomRight = (Button)findViewById(R.id.bottom_right_button);
+        bottomRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Add a spacebar to the string buffer
+                state.addCharacter(' ');
+                input.setText(state.getSentence());
+                input.setSelection(state.getSentence().length());
+            }
+        });
+
+        // Buttons for the current keyboard
         Button button_one = (Button)findViewById(R.id.button_one);
         button_one.setOnTouchListener(new View.OnTouchListener() {
             @Override
