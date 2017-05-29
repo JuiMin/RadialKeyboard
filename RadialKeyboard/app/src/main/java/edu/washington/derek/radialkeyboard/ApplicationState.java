@@ -42,7 +42,10 @@ class ApplicationState extends Application {
         // Check if the instance has been initialized, if it already exists do nothing
         if (getInstance() == null) {
             // Set the layout display to be the default (1 is the english Alphabet)
-            currentLayout = 1;
+            // 0 = alphabet
+            // 1 = symbols
+            // 2 = numbers
+            currentLayout = 2;
 
             // Initialize the String Buffer
             sb = new StringBuffer();

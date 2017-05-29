@@ -33,10 +33,18 @@
         <item name="android:background">@drawable/round_button</item>
     </style>
     
-    <style name="secondaryLetter">
-        <item name="android:textSize">8dp</item>
+    <style name="secondaryLetterLeft">
+        <item name="android:textSize">9dp</item>
         <item name="android:layout_height">10dp</item>
         <item name="android:layout_width">10dp</item>
+        <item name="android:textColor">@android:color/holo_green_dark</item>
+    </style>
+
+    <style name="secondaryLetterRight">
+        <item name="android:textSize">9dp</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:layout_width">10dp</item>
+        <item name="android:textColor">@android:color/holo_red_dark</item>
     </style>
 
 </resources>
