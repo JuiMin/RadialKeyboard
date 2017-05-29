@@ -23,76 +23,131 @@
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="-37dp" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-
-            android:layout_toLeftOf="@+id/center_button"
-            android:layout_toStartOf="@+id/center_button"
-            android:background="@drawable/round_button"
-            android:text="A"
-            android:textSize="4dp" />
-
-        <Button
-                android:id="@+id/button_nine"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/round_button"
-
-                android:text="A"
-                android:textSize="4dp"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/center_button"
-                android:layout_toStartOf="@+id/center_button" />
-
-            <Button
-                android:id="@+id/button_two"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/round_button"
-                android:text="B"
-                android:textSize="4dp"
-                android:layout_alignRight="@+id/center_button"
-                android:layout_alignEnd="@+id/center_button" />
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
 
             <Button
                 android:id="@+id/top_left_button"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                style="@style/CornerButton"
                 android:background="@drawable/round_button"
-                android:text="Shift"
-                android:textSize="4dp"
-                android:layout_alignParentTop="true"
-                android:layout_toLeftOf="@+id/button_nine"
-                android:layout_toStartOf="@+id/button_nine" />
+                android:text="shift"
+                android:textColor="#fff"
+                android:textSize="6dp"
+                android:layout_alignParentTop="true" />
 
             <Button
-                android:id="@+id/button3"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:id="@+id/top_right_button"
+                style="@style/LetterButton"
                 android:background="@drawable/round_button"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="A"
+                android:text="SEND"
                 android:textColor="#fff"
-                android:textSize="8dp"
+                android:textSize="6dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true" />
+
+            <Button
+                android:id="@+id/center_button"
+                style="@style/CenterButton"
+                android:text="A"
+                android:layout_margin="5dp"
+                android:layout_below="@+id/top_left_button"
+                android:layout_centerHorizontal="true" />
+
+            <Button
+                android:id="@+id/button_one"
+                style="@style/LetterButton"
+                android:text="E"
                 android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/button_nine" />
+                android:layout_toLeftOf="@+id/button_two"
+                android:layout_toStartOf="@+id/button_two" />
+
+            <Button
+                android:id="@+id/button_two"
+                style="@style/LetterButton"
+                android:text="E"
+                android:layout_above="@+id/center_button"
+                android:layout_toRightOf="@id/center_button"
+                android:layout_alignBaseline="@id/center_button" />
+
+            <Button
+                android:id="@+id/button_eight"
+                style="@style/LetterButton"
+                android:text="E"
+                android:layout_above="@+id/center_button"
+                android:layout_toLeftOf="@id/center_button"
+                android:layout_alignBaseline="@id/center_button" />
+
+            <Button
+                android:id="@+id/button_nine"
+                style="@style/LetterButton"
+                android:text="E"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/button_eight"
+                android:layout_toEndOf="@+id/button_eight" />
+
+            <Button
+                android:id="@+id/button_seven"
+                style="@style/LetterButton"
+                android:text="E"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/button_eight"
+                android:layout_alignLeft="@+id/button_eight"
+                android:layout_alignStart="@+id/button_eight" />
+
+            <Button
+                android:id="@+id/button_three"
+                style="@style/LetterButton"
+                android:text="E"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/button_two"
+                android:layout_alignRight="@+id/button_two"
+                android:layout_alignEnd="@+id/button_two" />
+
+            <Button
+                android:id="@+id/button_five"
+                style="@style/LetterButton"
+                android:text="E"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_below="@+id/center_button"
+                android:layout_centerHorizontal="true" />
+
+            <Button
+                android:id="@+id/button_four"
+                style="@style/LetterButton"
+                android:text="E"
+                android:layout_marginTop="-5dp"
+                android:layout_below="@+id/center_button"
+                android:layout_toRightOf="@id/button_five" />
+
+            <Button
+                android:id="@+id/button_six"
+                style="@style/LetterButton"
+                android:text="E"
+                android:layout_marginTop="-5dp"
+                android:layout_below="@id/center_button"
+                android:layout_toLeftOf="@id/button_five" />
+
+            <Button
+                android:id="@+id/bottom_left_button"
+                style="@style/CornerButton"
+                android:background="@drawable/round_button"
+                android:text="shift"
+                android:textColor="#fff"
+                android:textSize="6dp"
+                android:layout_alignParentBottom="true" />
+
+            <Button
+                android:id="@+id/bottom_right_button"
+                style="@style/CornerButton"
+                android:background="@drawable/round_button"
+                android:text="shift"
+                android:textColor="#fff"
+                android:textSize="6dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true" />
+
+        </RelativeLayout>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/center_button"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_alignTop="@+id/button"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/round_button"
-        android:text="A"
-        android:textSize="4dp"
-        tools:layout_editor_absoluteX="88dp"
-        tools:layout_editor_absoluteY="94dp" />
-
-
 </android.support.constraint.ConstraintLayout>

@@ -1,10 +1,13 @@
 package edu.washington.derek.radialkeyboard;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -19,6 +22,20 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the Edit Text so that we can update the text field
         final EditText input = (EditText)findViewById(R.id.input_area);
+
+        // Should remove the keyboard
+        input.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v.onTouchEvent(event);
+                InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+                return true;
+            }
+        });
 
         // On create, get an instance of the state
         // Extends application should run on application start so this information should be fine
@@ -60,9 +77,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-
-
 
         Log.i(TAG, "Keyboard Main Activity successfully created");
     }
