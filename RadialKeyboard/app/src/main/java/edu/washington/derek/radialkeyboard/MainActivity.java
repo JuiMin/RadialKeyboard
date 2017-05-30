@@ -167,10 +167,14 @@ public class MainActivity extends AppCompatActivity {
 
             // Rerender the buttons
             setButtons(layouts.getJSONObject(selectedLayout), state.getShiftStatus());
+            activateButtons(state.getShiftStatus());
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void activateButtons(boolean shiftOn) {
     }
 
     // Set the text for the buttons
