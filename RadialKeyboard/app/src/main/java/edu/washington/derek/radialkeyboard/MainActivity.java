@@ -366,6 +366,7 @@ public class MainActivity extends AppCompatActivity {
                             // Drawables for the buttons
                             Drawable roundButtonLeft = ContextCompat.getDrawable(getApplicationContext(),R.drawable.round_button_left);
                             Drawable roundButtonRight = ContextCompat.getDrawable(getApplicationContext(),R.drawable.round_button_right);
+                            Drawable roundButtonSelected = ContextCompat.getDrawable(getApplicationContext(), R.drawable.round_button_selected);
 
                             // If it is a button
                             switch (hovered.getId()) {
@@ -380,6 +381,7 @@ public class MainActivity extends AppCompatActivity {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                                             button_nine.setBackground(roundButtonLeft);
                                             button_two.setBackground(roundButtonRight);
+                                            button_one.setBackground(roundButtonSelected);
                                         }
                                     }
                                     hovered.performClick();
@@ -394,6 +396,7 @@ public class MainActivity extends AppCompatActivity {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                                             button_one.setBackground(roundButtonLeft);
                                             button_three.setBackground(roundButtonRight);
+                                            button_two.setBackground(roundButtonSelected);
                                         }
                                     }
                                     hovered.performClick();
@@ -408,6 +411,7 @@ public class MainActivity extends AppCompatActivity {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                                             button_two.setBackground(roundButtonLeft);
                                             button_four.setBackground(roundButtonRight);
+                                            button_three.setBackground(roundButtonSelected);
                                         }
                                     }
                                     hovered.performClick();
@@ -422,6 +426,7 @@ public class MainActivity extends AppCompatActivity {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                                             button_three.setBackground(roundButtonLeft);
                                             button_five.setBackground(roundButtonRight);
+                                            button_four.setBackground(roundButtonSelected);
                                         }
                                     }
                                     hovered.performClick();
@@ -436,6 +441,7 @@ public class MainActivity extends AppCompatActivity {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                                             button_four.setBackground(roundButtonLeft);
                                             button_six.setBackground(roundButtonRight);
+                                            button_five.setBackground(roundButtonSelected);
                                         }
                                     }
                                     hovered.performClick();
@@ -450,6 +456,7 @@ public class MainActivity extends AppCompatActivity {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                                             button_five.setBackground(roundButtonLeft);
                                             button_seven.setBackground(roundButtonRight);
+                                            button_six.setBackground(roundButtonSelected);
                                         }
                                     }
                                     hovered.performClick();
@@ -464,6 +471,7 @@ public class MainActivity extends AppCompatActivity {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                                             button_six.setBackground(roundButtonLeft);
                                             button_eight.setBackground(roundButtonRight);
+                                            button_seven.setBackground(roundButtonSelected);
                                         }
                                     }
                                     hovered.performClick();
@@ -478,6 +486,7 @@ public class MainActivity extends AppCompatActivity {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                                             button_seven.setBackground(roundButtonLeft);
                                             button_nine.setBackground(roundButtonRight);
+                                            button_eight.setBackground(roundButtonSelected);
                                         }
                                     }
                                     hovered.performClick();
@@ -492,6 +501,7 @@ public class MainActivity extends AppCompatActivity {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                                             button_eight.setBackground(roundButtonLeft);
                                             button_one.setBackground(roundButtonRight);
+                                            button_nine.setBackground(roundButtonSelected);
                                         }
                                     }
                                     hovered.performClick();
@@ -685,6 +695,7 @@ public class MainActivity extends AppCompatActivity {
                 button_eight_right.setText(layout.getJSONArray("button_eight").get(2).toString().toUpperCase());
                 button_nine_left.setText(layout.getJSONArray("button_nine").get(1).toString().toUpperCase());
                 button_nine_right.setText(layout.getJSONArray("button_nine").get(2).toString().toUpperCase());
+
             } else {
                 button_one_left.setText(layout.getJSONArray("button_one").get(1).toString());
                 button_one_right.setText(layout.getJSONArray("button_one").get(2).toString());

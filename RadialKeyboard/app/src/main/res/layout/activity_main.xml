@@ -35,7 +35,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="140dp">
-            
+
             <RelativeLayout
                 android:id="@+id/top_row"
                 android:layout_width="match_parent"
@@ -77,8 +77,6 @@
                     android:id="@+id/button_one"
                     style="@style/LetterButton"
                     android:layout_alignParentTop="true"
-                    android:layout_marginRight="-5dp"
-                    android:layout_alignRight="@id/center_button"
                     android:layout_toLeftOf="@+id/button_two"
                     android:layout_toStartOf="@+id/button_two" />
 
@@ -145,14 +143,12 @@
                     android:id="@+id/button_one_left"
                     style="@style/secondaryLetterLeft"
                     android:text="C"
-                    android:layout_marginRight="-3dp"
                     android:layout_toLeftOf="@id/button_one"/>
 
                 <TextView
                     android:id="@+id/button_one_right"
                     android:text="U"
                     style="@style/secondaryLetterRight"
-                    android:layout_marginLeft="2dp"
                     android:layout_toRightOf="@id/button_one"/>
 
                 <TextView
@@ -167,10 +163,8 @@
                     android:id="@+id/button_two_left"
                     android:text="D"
                     style="@style/secondaryLetterLeft"
-                    android:layout_marginBottom="3dp"
-                    android:layout_marginLeft="5dp"
                     android:layout_above="@id/button_two_right"
-                    android:layout_alignRight="@id/button_two"
+                    android:layout_toRightOf="@id/button_two"
                     />
 
                 <TextView
@@ -211,8 +205,7 @@
                     android:id="@+id/button_five_left"
                     android:text="F"
                     style="@style/secondaryLetterLeft"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginLeft="-10dp"
+                    android:layout_marginLeft="-15dp"
                     android:layout_toRightOf="@id/button_five"
                     android:layout_below="@id/button_five" />
 
@@ -220,7 +213,6 @@
                     android:id="@+id/button_five_right"
                     android:text="Y"
                     style="@style/secondaryLetterRight"
-                    android:layout_marginTop="2dp"
                     android:layout_marginRight="-14dp"
                     android:layout_below="@id/button_five"
                     android:layout_toLeftOf="@id/button_five"/>
@@ -262,27 +254,24 @@
                     style="@style/secondaryLetterLeft"
                     android:layout_alignBaseline="@id/button_eight"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="-3dp"
                     android:layout_toLeftOf="@id/button_eight"/>
 
                 <TextView
                     android:id="@+id/button_eight_right"
                     android:text="J"
                     style="@style/secondaryLetterRight"
-                    android:layout_marginBottom="2dp"
                     android:layout_above="@id/button_eight_left"
-                    android:layout_alignLeft="@id/button_eight"/>
+                    android:layout_toLeftOf="@id/button_eight"/>
 
                 <TextView
                     android:id="@+id/button_nine_left"
                     android:text="Q"
-                    android:layout_marginRight="-3dp"
                     style="@style/secondaryLetterLeft"
                     android:layout_toLeftOf="@id/button_nine" />
 
                 <TextView
                     android:id="@+id/button_nine_right"
-                    android:text=""
+                    android:text="."
                     style="@style/secondaryLetterRight"
                     android:layout_toRightOf="@id/button_nine" />
 
@@ -314,9 +303,6 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true" />
             </RelativeLayout>
-
-
-
         </RelativeLayout>
     </LinearLayout>
 
