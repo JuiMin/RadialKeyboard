@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -39,6 +40,10 @@ import static android.view.DragEvent.ACTION_DRAG_STARTED;
 public class MainActivity extends AppCompatActivity {
 
     private static String TAG = "Keyboard Main Activity";
+
+    // Swiping Constants
+    private float x1,x2;
+    static final int MIN_DISTANCE = 230;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -378,11 +383,10 @@ public class MainActivity extends AppCompatActivity {
                                         TextView secondary_right = (TextView)findViewById(R.id.button_one_right);
                                         button_nine.setText(secondary_left.getText());
                                         button_two.setText(secondary_right.getText());
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                            button_nine.setBackground(roundButtonLeft);
-                                            button_two.setBackground(roundButtonRight);
-                                            button_one.setBackground(roundButtonSelected);
-                                        }
+                                        button_nine.setBackground(roundButtonLeft);
+                                        button_two.setBackground(roundButtonRight);
+                                        button_one.setBackground(roundButtonSelected);
+
                                     }
                                     hovered.performClick();
                                 case R.id.button_two:
@@ -393,11 +397,10 @@ public class MainActivity extends AppCompatActivity {
                                         TextView secondary_right = (TextView)findViewById(R.id.button_two_right);
                                         button_one.setText(secondary_left.getText());
                                         button_three.setText(secondary_right.getText());
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                            button_one.setBackground(roundButtonLeft);
-                                            button_three.setBackground(roundButtonRight);
-                                            button_two.setBackground(roundButtonSelected);
-                                        }
+                                        button_one.setBackground(roundButtonLeft);
+                                        button_three.setBackground(roundButtonRight);
+                                        button_two.setBackground(roundButtonSelected);
+
                                     }
                                     hovered.performClick();
                                 case R.id.button_three:
@@ -408,11 +411,10 @@ public class MainActivity extends AppCompatActivity {
                                         TextView secondary_right = (TextView)findViewById(R.id.button_three_right);
                                         button_two.setText(secondary_left.getText());
                                         button_four.setText(secondary_right.getText());
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                            button_two.setBackground(roundButtonLeft);
-                                            button_four.setBackground(roundButtonRight);
-                                            button_three.setBackground(roundButtonSelected);
-                                        }
+                                        button_two.setBackground(roundButtonLeft);
+                                        button_four.setBackground(roundButtonRight);
+                                        button_three.setBackground(roundButtonSelected);
+
                                     }
                                     hovered.performClick();
                                 case R.id.button_four:
@@ -423,11 +425,10 @@ public class MainActivity extends AppCompatActivity {
                                         TextView secondary_right = (TextView)findViewById(R.id.button_four_right);
                                         button_three.setText(secondary_left.getText());
                                         button_five.setText(secondary_right.getText());
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                            button_three.setBackground(roundButtonLeft);
-                                            button_five.setBackground(roundButtonRight);
-                                            button_four.setBackground(roundButtonSelected);
-                                        }
+                                        button_three.setBackground(roundButtonLeft);
+                                        button_five.setBackground(roundButtonRight);
+                                        button_four.setBackground(roundButtonSelected);
+
                                     }
                                     hovered.performClick();
                                 case R.id.button_five:
@@ -438,11 +439,10 @@ public class MainActivity extends AppCompatActivity {
                                         TextView secondary_right = (TextView)findViewById(R.id.button_five_right);
                                         button_four.setText(secondary_left.getText());
                                         button_six.setText(secondary_right.getText());
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                            button_four.setBackground(roundButtonLeft);
-                                            button_six.setBackground(roundButtonRight);
-                                            button_five.setBackground(roundButtonSelected);
-                                        }
+                                        button_four.setBackground(roundButtonLeft);
+                                        button_six.setBackground(roundButtonRight);
+                                        button_five.setBackground(roundButtonSelected);
+
                                     }
                                     hovered.performClick();
                                 case R.id.button_six:
@@ -453,11 +453,10 @@ public class MainActivity extends AppCompatActivity {
                                         TextView secondary_right = (TextView)findViewById(R.id.button_six_right);
                                         button_five.setText(secondary_left.getText());
                                         button_seven.setText(secondary_right.getText());
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                            button_five.setBackground(roundButtonLeft);
-                                            button_seven.setBackground(roundButtonRight);
-                                            button_six.setBackground(roundButtonSelected);
-                                        }
+                                        button_five.setBackground(roundButtonLeft);
+                                        button_seven.setBackground(roundButtonRight);
+                                        button_six.setBackground(roundButtonSelected);
+
                                     }
                                     hovered.performClick();
                                 case R.id.button_seven:
@@ -468,11 +467,10 @@ public class MainActivity extends AppCompatActivity {
                                         TextView secondary_right = (TextView)findViewById(R.id.button_seven_right);
                                         button_six.setText(secondary_left.getText());
                                         button_eight.setText(secondary_right.getText());
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                            button_six.setBackground(roundButtonLeft);
-                                            button_eight.setBackground(roundButtonRight);
-                                            button_seven.setBackground(roundButtonSelected);
-                                        }
+                                        button_six.setBackground(roundButtonLeft);
+                                        button_eight.setBackground(roundButtonRight);
+                                        button_seven.setBackground(roundButtonSelected);
+
                                     }
                                     hovered.performClick();
                                 case R.id.button_eight:
@@ -483,11 +481,10 @@ public class MainActivity extends AppCompatActivity {
                                         TextView secondary_right = (TextView)findViewById(R.id.button_eight_right);
                                         button_seven.setText(secondary_left.getText());
                                         button_nine.setText(secondary_right.getText());
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                            button_seven.setBackground(roundButtonLeft);
-                                            button_nine.setBackground(roundButtonRight);
-                                            button_eight.setBackground(roundButtonSelected);
-                                        }
+                                        button_seven.setBackground(roundButtonLeft);
+                                        button_nine.setBackground(roundButtonRight);
+                                        button_eight.setBackground(roundButtonSelected);
+
                                     }
                                     hovered.performClick();
                                 case R.id.button_nine:
@@ -498,11 +495,9 @@ public class MainActivity extends AppCompatActivity {
                                         TextView secondary_right = (TextView)findViewById(R.id.button_nine_right);
                                         button_eight.setText(secondary_left.getText());
                                         button_one.setText(secondary_right.getText());
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                            button_eight.setBackground(roundButtonLeft);
-                                            button_one.setBackground(roundButtonRight);
-                                            button_nine.setBackground(roundButtonSelected);
-                                        }
+                                        button_eight.setBackground(roundButtonLeft);
+                                        button_one.setBackground(roundButtonRight);
+                                        button_nine.setBackground(roundButtonSelected);
                                     }
                                     hovered.performClick();
                                 case R.id.center_button:
@@ -521,9 +516,7 @@ public class MainActivity extends AppCompatActivity {
                     } else if (event.getAction() == MotionEvent.ACTION_UP) {
                         // On release the button should do its thing
                         Log.i(TAG, "Center button released");
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                            resetButtonColors();
-                        }
+                        resetButtonColors();
                         state.addCharacter();
                         String sentence = state.getSentence();
                         EditText input = (EditText) findViewById(R.id.input_area);
@@ -799,6 +792,47 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         Log.e(TAG, "Keyboard Main Activity has stopped");
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        switch(event.getAction())
+        {
+            case MotionEvent.ACTION_DOWN:
+                x1 = event.getX();
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = event.getX();
+                float deltaX = x2 - x1;
+                if (Math.abs(deltaX) > MIN_DISTANCE)
+                {
+                    ApplicationState state = ApplicationState.getInstance();
+
+                    // ONe direction
+                    if (deltaX > 0) {
+                        if (state.getCurrentLayout() >= 2) {
+                            state.setCurrentLayout(0);
+                        } else {
+                            state.setCurrentLayout(state.getCurrentLayout() + 1);
+                        }
+                    } else {
+                        // Other direction
+                        if (state.getCurrentLayout() <= 0) {
+                            state.setCurrentLayout(2);
+                        } else {
+                            state.setCurrentLayout(state.getCurrentLayout() - 1);
+                        }
+                    }
+                    buttonUpdate();
+                }
+                else
+                {
+                    // consider as something else - a screen tap for example
+                }
+                break;
+        }
+        return super.onTouchEvent(event);
     }
 
 }
