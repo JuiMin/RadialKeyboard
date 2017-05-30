@@ -175,6 +175,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void activateButtons(boolean shiftOn) {
+        if (shiftOn) {
+            int x = 5;
+        }
     }
 
     // Set the text for the buttons
