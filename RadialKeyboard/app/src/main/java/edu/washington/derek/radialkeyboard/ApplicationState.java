@@ -39,7 +39,7 @@ class ApplicationState extends Application {
     private StringBuffer sb;
 
     // Current Letter
-    private String currentLetter;
+    private String currentCharacter;
 
     private ApplicationState() {
         // Check if the instance has been initialized, if it already exists do nothing
@@ -52,7 +52,7 @@ class ApplicationState extends Application {
 
             // set current letter to empty string
 
-            currentLetter = "";
+            currentCharacter = "";
 
             // Initialize the String Buffer
             sb = new StringBuffer();
@@ -96,12 +96,14 @@ class ApplicationState extends Application {
 
     // Add a character from the string buffer
     public void addCharacter() {
-        sb.append(currentLetter);
+        sb.append(currentCharacter);
     }
 
     public void setCurrentCharacter(String current) {
-        currentLetter = current;
+        currentCharacter = current;
     }
+
+    public String getCurrentCharacter() { return currentCharacter; }
 
     // Remove a character from the string buffer
     public void deleteCharacter() {

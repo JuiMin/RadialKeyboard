@@ -167,22 +167,142 @@ public class MainActivity extends AppCompatActivity {
 
             // Rerender the buttons
             setButtons(layouts.getJSONObject(selectedLayout), state.getShiftStatus());
-            activateButtons(state.getShiftStatus());
+            activateButtons(layouts.getJSONObject(selectedLayout));
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void activateButtons(boolean shiftOn) {
-        if (shiftOn) {
-            int x = 5;
-        }
+    private void activateButtons(final JSONObject layout) {
+        // Get Application State
+
+        final ApplicationState state = ApplicationState.getInstance();
+
+        // Get button references
+        final Button button_one = (Button)findViewById(R.id.button_one);
+        final Button button_two = (Button)findViewById(R.id.button_two);
+        final Button button_three = (Button)findViewById(R.id.button_three);
+        final Button button_four = (Button)findViewById(R.id.button_four);
+        final Button button_five = (Button)findViewById(R.id.button_five);
+        final Button button_six = (Button)findViewById(R.id.button_six);
+        final Button button_seven = (Button)findViewById(R.id.button_seven);
+        final Button button_eight = (Button)findViewById(R.id.button_eight);
+        final Button button_nine = (Button)findViewById(R.id.button_nine);
+        final Button button_center = (Button)findViewById(R.id.center_button);
+
+        button_one.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Button One on touch listener
+                if (!state.getCurrentCharacter().equalsIgnoreCase(button_one.getText().toString())) {
+                    state.setCurrentCharacter(button_one.getText().toString());
+                }
+                return false;
+            }
+        });
+
+        button_two.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Button One on touch listener
+                if (!state.getCurrentCharacter().equalsIgnoreCase(button_two.getText().toString())) {
+                    state.setCurrentCharacter(button_two.getText().toString());
+                }
+                return false;
+            }
+        });
+
+        button_three.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Button One on touch listener
+                if (!state.getCurrentCharacter().equalsIgnoreCase(button_three.getText().toString())) {
+                    state.setCurrentCharacter(button_three.getText().toString());
+                }
+                return false;
+            }
+        });
+
+        button_four.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Button One on touch listener
+                if (!state.getCurrentCharacter().equalsIgnoreCase(button_four.getText().toString())) {
+                    state.setCurrentCharacter(button_four.getText().toString());
+                }
+                return false;
+            }
+        });
+
+        button_five.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Button One on touch listener
+                if (!state.getCurrentCharacter().equalsIgnoreCase(button_five.getText().toString())) {
+                    state.setCurrentCharacter(button_five.getText().toString());
+                }
+                return false;
+            }
+        });
+
+        button_six.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Button One on touch listener
+                if (!state.getCurrentCharacter().equalsIgnoreCase(button_six.getText().toString())) {
+                    state.setCurrentCharacter(button_six.getText().toString());
+                }
+                return false;
+            }
+        });
+
+        button_seven.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Button One on touch listener
+                if (!state.getCurrentCharacter().equalsIgnoreCase(button_seven.getText().toString())) {
+                    state.setCurrentCharacter(button_seven.getText().toString());
+                }
+                return false;
+            }
+        });
+
+        button_eight.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Button One on touch listener
+                if (!state.getCurrentCharacter().equalsIgnoreCase(button_eight.getText().toString())) {
+                    state.setCurrentCharacter(button_eight.getText().toString());
+                }
+                return false;
+            }
+        });
+
+        button_nine.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Button One on touch listener
+                if (!state.getCurrentCharacter().equalsIgnoreCase(button_nine.getText().toString())) {
+                    state.setCurrentCharacter(button_nine.getText().toString());
+                }
+                return false;
+            }
+        });
+
+        button_center.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                state.addCharacter();
+                EditText input = (EditText)findViewById(R.id.input_area);
+                input.setText(state.getSentence());
+                input.setSelection(state.getSentence().length());
+            }
+        });
     }
 
     // Set the text for the buttons
     private void setButtons(JSONObject layout, boolean shiftOn) throws JSONException {
-
         // Get Buttons
         Button button_one = (Button)findViewById(R.id.button_one);
         Button button_two = (Button)findViewById(R.id.button_two);
