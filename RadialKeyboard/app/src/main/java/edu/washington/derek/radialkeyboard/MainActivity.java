@@ -378,11 +378,10 @@ public class MainActivity extends AppCompatActivity {
                                         TextView secondary_right = (TextView)findViewById(R.id.button_one_right);
                                         button_nine.setText(secondary_left.getText());
                                         button_two.setText(secondary_right.getText());
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                            button_nine.setBackground(roundButtonLeft);
-                                            button_two.setBackground(roundButtonRight);
-                                            button_one.setBackground(roundButtonSelected);
-                                        }
+                                        button_nine.setBackground(roundButtonLeft);
+                                        button_two.setBackground(roundButtonRight);
+                                        button_one.setBackground(roundButtonSelected);
+
                                     }
                                     hovered.performClick();
                                 case R.id.button_two:
@@ -393,11 +392,10 @@ public class MainActivity extends AppCompatActivity {
                                         TextView secondary_right = (TextView)findViewById(R.id.button_two_right);
                                         button_one.setText(secondary_left.getText());
                                         button_three.setText(secondary_right.getText());
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                            button_one.setBackground(roundButtonLeft);
-                                            button_three.setBackground(roundButtonRight);
-                                            button_two.setBackground(roundButtonSelected);
-                                        }
+                                        button_one.setBackground(roundButtonLeft);
+                                        button_three.setBackground(roundButtonRight);
+                                        button_two.setBackground(roundButtonSelected);
+
                                     }
                                     hovered.performClick();
                                 case R.id.button_three:
@@ -408,11 +406,10 @@ public class MainActivity extends AppCompatActivity {
                                         TextView secondary_right = (TextView)findViewById(R.id.button_three_right);
                                         button_two.setText(secondary_left.getText());
                                         button_four.setText(secondary_right.getText());
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                            button_two.setBackground(roundButtonLeft);
-                                            button_four.setBackground(roundButtonRight);
-                                            button_three.setBackground(roundButtonSelected);
-                                        }
+                                        button_two.setBackground(roundButtonLeft);
+                                        button_four.setBackground(roundButtonRight);
+                                        button_three.setBackground(roundButtonSelected);
+
                                     }
                                     hovered.performClick();
                                 case R.id.button_four:
@@ -423,11 +420,10 @@ public class MainActivity extends AppCompatActivity {
                                         TextView secondary_right = (TextView)findViewById(R.id.button_four_right);
                                         button_three.setText(secondary_left.getText());
                                         button_five.setText(secondary_right.getText());
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                            button_three.setBackground(roundButtonLeft);
-                                            button_five.setBackground(roundButtonRight);
-                                            button_four.setBackground(roundButtonSelected);
-                                        }
+                                        button_three.setBackground(roundButtonLeft);
+                                        button_five.setBackground(roundButtonRight);
+                                        button_four.setBackground(roundButtonSelected);
+
                                     }
                                     hovered.performClick();
                                 case R.id.button_five:
@@ -438,11 +434,10 @@ public class MainActivity extends AppCompatActivity {
                                         TextView secondary_right = (TextView)findViewById(R.id.button_five_right);
                                         button_four.setText(secondary_left.getText());
                                         button_six.setText(secondary_right.getText());
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                            button_four.setBackground(roundButtonLeft);
-                                            button_six.setBackground(roundButtonRight);
-                                            button_five.setBackground(roundButtonSelected);
-                                        }
+                                        button_four.setBackground(roundButtonLeft);
+                                        button_six.setBackground(roundButtonRight);
+                                        button_five.setBackground(roundButtonSelected);
+
                                     }
                                     hovered.performClick();
                                 case R.id.button_six:
@@ -453,11 +448,10 @@ public class MainActivity extends AppCompatActivity {
                                         TextView secondary_right = (TextView)findViewById(R.id.button_six_right);
                                         button_five.setText(secondary_left.getText());
                                         button_seven.setText(secondary_right.getText());
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                            button_five.setBackground(roundButtonLeft);
-                                            button_seven.setBackground(roundButtonRight);
-                                            button_six.setBackground(roundButtonSelected);
-                                        }
+                                        button_five.setBackground(roundButtonLeft);
+                                        button_seven.setBackground(roundButtonRight);
+                                        button_six.setBackground(roundButtonSelected);
+
                                     }
                                     hovered.performClick();
                                 case R.id.button_seven:
@@ -468,11 +462,10 @@ public class MainActivity extends AppCompatActivity {
                                         TextView secondary_right = (TextView)findViewById(R.id.button_seven_right);
                                         button_six.setText(secondary_left.getText());
                                         button_eight.setText(secondary_right.getText());
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                            button_six.setBackground(roundButtonLeft);
-                                            button_eight.setBackground(roundButtonRight);
-                                            button_seven.setBackground(roundButtonSelected);
-                                        }
+                                        button_six.setBackground(roundButtonLeft);
+                                        button_eight.setBackground(roundButtonRight);
+                                        button_seven.setBackground(roundButtonSelected);
+
                                     }
                                     hovered.performClick();
                                 case R.id.button_eight:
@@ -483,11 +476,10 @@ public class MainActivity extends AppCompatActivity {
                                         TextView secondary_right = (TextView)findViewById(R.id.button_eight_right);
                                         button_seven.setText(secondary_left.getText());
                                         button_nine.setText(secondary_right.getText());
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                            button_seven.setBackground(roundButtonLeft);
-                                            button_nine.setBackground(roundButtonRight);
-                                            button_eight.setBackground(roundButtonSelected);
-                                        }
+                                        button_seven.setBackground(roundButtonLeft);
+                                        button_nine.setBackground(roundButtonRight);
+                                        button_eight.setBackground(roundButtonSelected);
+
                                     }
                                     hovered.performClick();
                                 case R.id.button_nine:
@@ -498,11 +490,9 @@ public class MainActivity extends AppCompatActivity {
                                         TextView secondary_right = (TextView)findViewById(R.id.button_nine_right);
                                         button_eight.setText(secondary_left.getText());
                                         button_one.setText(secondary_right.getText());
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                            button_eight.setBackground(roundButtonLeft);
-                                            button_one.setBackground(roundButtonRight);
-                                            button_nine.setBackground(roundButtonSelected);
-                                        }
+                                        button_eight.setBackground(roundButtonLeft);
+                                        button_one.setBackground(roundButtonRight);
+                                        button_nine.setBackground(roundButtonSelected);
                                     }
                                     hovered.performClick();
                                 case R.id.center_button:
