@@ -52,7 +52,7 @@
 
                 <Button
                     android:id="@+id/top_right_button"
-                    style="@style/LetterButton"
+                    style="@style/CornerButton"
                     android:background="@drawable/round_button"
                     android:text="SEND"
                     android:textColor="#fff"
@@ -77,6 +77,8 @@
                     android:id="@+id/button_one"
                     style="@style/LetterButton"
                     android:layout_alignParentTop="true"
+                    android:layout_marginRight="-5dp"
+                    android:layout_alignRight="@id/center_button"
                     android:layout_toLeftOf="@+id/button_two"
                     android:layout_toStartOf="@+id/button_two" />
 
