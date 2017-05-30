@@ -1,5 +1,6 @@
 package edu.washington.derek.radialkeyboard;
 
+import android.app.Application;
 import android.content.Context;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -58,11 +59,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // This button should toggle the shift
                 state.toggleShift();
-                if (state.getShiftStatus()) {
-                    input.setText("Shift On");
-                } else {
-                    input.setText("Shift Off");
-                }
+
+                // Update the buttons to reflect that the shift is now on
+                buttonUpdate();
             }
         });
 
@@ -97,19 +96,67 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Add a spacebar to the string buffer
-                state.addCharacter(' ');
+                state.setCurrentCharacter(" ");
+                state.addCharacter();
                 input.setText(state.getSentence());
                 input.setSelection(state.getSentence().length());
             }
         });
 
+        // Update the buttons with the current layout
+        buttonUpdate();
+
+        // Set the functionality for each button
+
+
+        Log.i(TAG, "Keyboard Main Activity successfully created");
+    }
+
+    // Load JSON
+    public String loadJSONFromAsset() {
+        String json = null;
         try {
+
+            InputStream is = getAssets().open("layouts.json");
+
+            int size = is.available();
+
+            byte[] buffer = new byte[size];
+
+            is.read(buffer);
+
+            is.close();
+
+            json = new String(buffer, "UTF-8");
+
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+
+    }
+
+    // Update the buttons
+    private void buttonUpdate() {
+        try {
+            // Get an instance of the state
+            ApplicationState state = ApplicationState.getInstance();
+
+            // Get reference to the edit text
+            EditText input = (EditText)findViewById(R.id.input_area);
+
+            // Load the JSON from file
             JSONObject obj = new JSONObject(loadJSONFromAsset());
             // If the JSON Loaded Correctly, populate the buttons
             JSONObject layouts = obj.getJSONObject("layouts");
 
+            // Test the state for current layout selection
             String selectedLayout = "";
             int current = state.getCurrentLayout();
+
+            // Get the json value for the layout selection
             if (current == 1) {
                 selectedLayout = "symbols";
             } else if (current == 2) {
@@ -117,19 +164,25 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 selectedLayout = "alphabet";
             }
-            setButtons(layouts.getJSONObject(selectedLayout));
 
-
+            // Rerender the buttons
+            setButtons(layouts.getJSONObject(selectedLayout), state.getShiftStatus());
+            activateButtons(state.getShiftStatus());
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-        Log.i(TAG, "Keyboard Main Activity successfully created");
     }
 
-    private void setButtons(JSONObject layout) throws JSONException {
+    private void activateButtons(boolean shiftOn) {
+        if (shiftOn) {
+            int x = 5;
+        }
+    }
+
+    // Set the text for the buttons
+    private void setButtons(JSONObject layout, boolean shiftOn) throws JSONException {
+
         // Get Buttons
         Button button_one = (Button)findViewById(R.id.button_one);
         Button button_two = (Button)findViewById(R.id.button_two);
@@ -143,16 +196,30 @@ public class MainActivity extends AppCompatActivity {
         Button button_center = (Button)findViewById(R.id.center_button);
 
         // Set the button text
-        button_one.setText(layout.getJSONArray("button_one").get(0).toString());
-        button_two.setText(layout.getJSONArray("button_two").get(0).toString());
-        button_three.setText(layout.getJSONArray("button_three").get(0).toString());
-        button_four.setText(layout.getJSONArray("button_four").get(0).toString());
-        button_five.setText(layout.getJSONArray("button_five").get(0).toString());
-        button_six.setText(layout.getJSONArray("button_six").get(0).toString());
-        button_seven.setText(layout.getJSONArray("button_seven").get(0).toString());
-        button_eight.setText(layout.getJSONArray("button_eight").get(0).toString());
-        button_nine.setText(layout.getJSONArray("button_nine").get(0).toString());
-        button_center.setText(layout.getJSONArray("button_center").get(0).toString());
+        if (shiftOn) {
+            button_one.setText(layout.getJSONArray("button_one").get(0).toString().toUpperCase());
+            button_two.setText(layout.getJSONArray("button_two").get(0).toString().toUpperCase());
+            button_three.setText(layout.getJSONArray("button_three").get(0).toString().toUpperCase());
+            button_four.setText(layout.getJSONArray("button_four").get(0).toString().toUpperCase());
+            button_five.setText(layout.getJSONArray("button_five").get(0).toString().toUpperCase());
+            button_six.setText(layout.getJSONArray("button_six").get(0).toString().toUpperCase());
+            button_seven.setText(layout.getJSONArray("button_seven").get(0).toString().toUpperCase());
+            button_eight.setText(layout.getJSONArray("button_eight").get(0).toString().toUpperCase());
+            button_nine.setText(layout.getJSONArray("button_nine").get(0).toString().toUpperCase());
+            button_center.setText(layout.getJSONArray("button_center").get(0).toString().toUpperCase());
+        } else {
+            button_one.setText(layout.getJSONArray("button_one").get(0).toString().toLowerCase());
+            button_two.setText(layout.getJSONArray("button_two").get(0).toString().toLowerCase());
+            button_three.setText(layout.getJSONArray("button_three").get(0).toString().toLowerCase());
+            button_four.setText(layout.getJSONArray("button_four").get(0).toString().toLowerCase());
+            button_five.setText(layout.getJSONArray("button_five").get(0).toString().toLowerCase());
+            button_six.setText(layout.getJSONArray("button_six").get(0).toString().toLowerCase());
+            button_seven.setText(layout.getJSONArray("button_seven").get(0).toString().toLowerCase());
+            button_eight.setText(layout.getJSONArray("button_eight").get(0).toString().toLowerCase());
+            button_nine.setText(layout.getJSONArray("button_nine").get(0).toString().toLowerCase());
+            button_center.setText(layout.getJSONArray("button_center").get(0).toString().toLowerCase());
+        }
+
 
         // Get the secondary buttons
         TextView button_one_left = (TextView)findViewById(R.id.button_one_left);
@@ -197,25 +264,45 @@ public class MainActivity extends AppCompatActivity {
             button_nine_right.setVisibility(View.VISIBLE);
 
             // Set the text for the smaller buttons
-            button_one_left.setText(layout.getJSONArray("button_one").get(1).toString());
-            button_one_right.setText(layout.getJSONArray("button_one").get(2).toString());
-            button_two_left.setText(layout.getJSONArray("button_two").get(1).toString());
-            button_two_right.setText(layout.getJSONArray("button_two").get(2).toString());
-            button_three_left.setText(layout.getJSONArray("button_three").get(1).toString());
-            button_three_right.setText(layout.getJSONArray("button_three").get(2).toString());
-            button_four_left.setText(layout.getJSONArray("button_four").get(1).toString());
-            button_four_right.setText(layout.getJSONArray("button_four").get(2).toString());
-            button_five_left.setText(layout.getJSONArray("button_five").get(1).toString());
-            button_five_right.setText(layout.getJSONArray("button_five").get(2).toString());
-            button_six_left.setText(layout.getJSONArray("button_six").get(1).toString());
-            button_six_right.setText(layout.getJSONArray("button_six").get(2).toString());
-            button_seven_left.setText(layout.getJSONArray("button_seven").get(1).toString());
-            button_seven_right.setText(layout.getJSONArray("button_seven").get(2).toString());
-            button_eight_left.setText(layout.getJSONArray("button_eight").get(1).toString());
-            button_eight_right.setText(layout.getJSONArray("button_eight").get(2).toString());
-            button_nine_left.setText(layout.getJSONArray("button_nine").get(1).toString());
-            button_nine_right.setText(layout.getJSONArray("button_nine").get(2).toString());
-
+            if (shiftOn) {
+                button_one_left.setText(layout.getJSONArray("button_one").get(1).toString().toUpperCase());
+                button_one_right.setText(layout.getJSONArray("button_one").get(2).toString().toUpperCase());
+                button_two_left.setText(layout.getJSONArray("button_two").get(1).toString().toUpperCase());
+                button_two_right.setText(layout.getJSONArray("button_two").get(2).toString().toUpperCase());
+                button_three_left.setText(layout.getJSONArray("button_three").get(1).toString().toUpperCase());
+                button_three_right.setText(layout.getJSONArray("button_three").get(2).toString().toUpperCase());
+                button_four_left.setText(layout.getJSONArray("button_four").get(1).toString().toUpperCase());
+                button_four_right.setText(layout.getJSONArray("button_four").get(2).toString().toUpperCase());
+                button_five_left.setText(layout.getJSONArray("button_five").get(1).toString().toUpperCase());
+                button_five_right.setText(layout.getJSONArray("button_five").get(2).toString().toUpperCase());
+                button_six_left.setText(layout.getJSONArray("button_six").get(1).toString().toUpperCase());
+                button_six_right.setText(layout.getJSONArray("button_six").get(2).toString().toUpperCase());
+                button_seven_left.setText(layout.getJSONArray("button_seven").get(1).toString().toUpperCase());
+                button_seven_right.setText(layout.getJSONArray("button_seven").get(2).toString().toUpperCase());
+                button_eight_left.setText(layout.getJSONArray("button_eight").get(1).toString().toUpperCase());
+                button_eight_right.setText(layout.getJSONArray("button_eight").get(2).toString().toUpperCase());
+                button_nine_left.setText(layout.getJSONArray("button_nine").get(1).toString().toUpperCase());
+                button_nine_right.setText(layout.getJSONArray("button_nine").get(2).toString().toUpperCase());
+            } else {
+                button_one_left.setText(layout.getJSONArray("button_one").get(1).toString());
+                button_one_right.setText(layout.getJSONArray("button_one").get(2).toString());
+                button_two_left.setText(layout.getJSONArray("button_two").get(1).toString());
+                button_two_right.setText(layout.getJSONArray("button_two").get(2).toString());
+                button_three_left.setText(layout.getJSONArray("button_three").get(1).toString());
+                button_three_right.setText(layout.getJSONArray("button_three").get(2).toString());
+                button_four_left.setText(layout.getJSONArray("button_four").get(1).toString());
+                button_four_right.setText(layout.getJSONArray("button_four").get(2).toString());
+                button_five_left.setText(layout.getJSONArray("button_five").get(1).toString());
+                button_five_right.setText(layout.getJSONArray("button_five").get(2).toString());
+                button_six_left.setText(layout.getJSONArray("button_six").get(1).toString());
+                button_six_right.setText(layout.getJSONArray("button_six").get(2).toString());
+                button_seven_left.setText(layout.getJSONArray("button_seven").get(1).toString());
+                button_seven_right.setText(layout.getJSONArray("button_seven").get(2).toString());
+                button_eight_left.setText(layout.getJSONArray("button_eight").get(1).toString());
+                button_eight_right.setText(layout.getJSONArray("button_eight").get(2).toString());
+                button_nine_left.setText(layout.getJSONArray("button_nine").get(1).toString());
+                button_nine_right.setText(layout.getJSONArray("button_nine").get(2).toString());
+            }
 
         } else {
             // Set the smaller buttons to invisible
@@ -240,30 +327,33 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Load JSON
-    public String loadJSONFromAsset() {
-        String json = null;
-        try {
+    // On touch event for the activity
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
 
-            InputStream is = getAssets().open("layouts.json");
+        int action = MotionEventCompat.getActionMasked(event);
 
-            int size = is.available();
-
-            byte[] buffer = new byte[size];
-
-            is.read(buffer);
-
-            is.close();
-
-            json = new String(buffer, "UTF-8");
-
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
+        switch(action) {
+            case (MotionEvent.ACTION_DOWN) :
+                Log.d(TAG,"Action was DOWN");
+                return true;
+            case (MotionEvent.ACTION_MOVE) :
+                Log.d(TAG,"Action was MOVE");
+                return true;
+            case (MotionEvent.ACTION_UP) :
+                Log.d(TAG,"Action was UP");
+                // System.exit(0);
+                return true;
+            case (MotionEvent.ACTION_CANCEL) :
+                Log.d(TAG,"Action was CANCEL");
+                return true;
+            case (MotionEvent.ACTION_OUTSIDE) :
+                Log.d(TAG,"Movement occurred outside bounds " +
+                        "of current screen element");
+                return true;
+            default :
+                return super.onTouchEvent(event);
         }
-        return json;
-
     }
 
     // Life Cycle Methods
@@ -304,72 +394,6 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "Keyboard Main Activity has stopped");
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event){
-
-        int action = MotionEventCompat.getActionMasked(event);
-
-        switch(action) {
-            case (MotionEvent.ACTION_DOWN) :
-                Log.d(TAG,"Action was DOWN");
-                return true;
-            case (MotionEvent.ACTION_MOVE) :
-                Log.d(TAG,"Action was MOVE");
-                return true;
-            case (MotionEvent.ACTION_UP) :
-                Log.d(TAG,"Action was UP");
-                try {
-                    // Get an instance of the state
-                    ApplicationState state = ApplicationState.getInstance();
-
-                    // Get reference to the edit text
-                    EditText input = (EditText)findViewById(R.id.input_area);
-
-                    // Load the JSON from file
-                    JSONObject obj = new JSONObject(loadJSONFromAsset());
-                    // If the JSON Loaded Correctly, populate the buttons
-                    JSONObject layouts = obj.getJSONObject("layouts");
-
-                    // Test the state for current layout selection
-                    String selectedLayout = "";
-                    int current = state.getCurrentLayout();
-                    // update the state with the new layout selection
-                    if (current < 2) {
-                        state.setCurrentLayout(current + 1);
-                        current = current + 1;
-                    } else {
-                        state.setCurrentLayout(0);
-                        current = 0;
-                    }
-                    // Get the json value for the layout selection
-                    if (current == 1) {
-                        selectedLayout = "symbols";
-                    } else if (current == 2) {
-                        selectedLayout = "numbers";
-                    } else {
-                        selectedLayout = "alphabet";
-                    }
-
-                    // Rerender the buttons
-                    input.setText(selectedLayout);
-                    setButtons(layouts.getJSONObject(selectedLayout));
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                // System.exit(0);
-                return true;
-            case (MotionEvent.ACTION_CANCEL) :
-                Log.d(TAG,"Action was CANCEL");
-                return true;
-            case (MotionEvent.ACTION_OUTSIDE) :
-                Log.d(TAG,"Movement occurred outside bounds " +
-                        "of current screen element");
-                return true;
-            default :
-                return super.onTouchEvent(event);
-        }
-    }
 
 
 }
