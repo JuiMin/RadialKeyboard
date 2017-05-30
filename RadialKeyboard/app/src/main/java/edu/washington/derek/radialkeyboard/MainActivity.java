@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -39,6 +40,10 @@ import static android.view.DragEvent.ACTION_DRAG_STARTED;
 public class MainActivity extends AppCompatActivity {
 
     private static String TAG = "Keyboard Main Activity";
+
+    // Swiping Constants
+    private float x1,x2;
+    static final int MIN_DISTANCE = 230;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -787,6 +792,47 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         Log.e(TAG, "Keyboard Main Activity has stopped");
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        switch(event.getAction())
+        {
+            case MotionEvent.ACTION_DOWN:
+                x1 = event.getX();
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = event.getX();
+                float deltaX = x2 - x1;
+                if (Math.abs(deltaX) > MIN_DISTANCE)
+                {
+                    ApplicationState state = ApplicationState.getInstance();
+
+                    // ONe direction
+                    if (deltaX > 0) {
+                        if (state.getCurrentLayout() >= 2) {
+                            state.setCurrentLayout(0);
+                        } else {
+                            state.setCurrentLayout(state.getCurrentLayout() + 1);
+                        }
+                    } else {
+                        // Other direction
+                        if (state.getCurrentLayout() <= 0) {
+                            state.setCurrentLayout(2);
+                        } else {
+                            state.setCurrentLayout(state.getCurrentLayout() - 1);
+                        }
+                    }
+                    buttonUpdate();
+                }
+                else
+                {
+                    // consider as something else - a screen tap for example
+                }
+                break;
+        }
+        return super.onTouchEvent(event);
     }
 
 }
