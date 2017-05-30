@@ -26,6 +26,9 @@ class ApplicationState extends Application {
     private boolean shiftOn;
 
     // This value is the index for the currently displayed layout
+    // 0 = alphabet
+    // 1 = symbols
+    // 2 = numbers
     private int currentLayout;
 
     // Holds the inputs in order
@@ -45,10 +48,7 @@ class ApplicationState extends Application {
         // Check if the instance has been initialized, if it already exists do nothing
         if (getInstance() == null) {
             // Set the layout display to be the default (1 is the english Alphabet)
-            // 0 = alphabet
-            // 1 = symbols
-            // 2 = numbers
-            currentLayout = 0;
+            currentLayout = 1;
 
             // set current letter to empty string
 
@@ -60,7 +60,7 @@ class ApplicationState extends Application {
             // Default shift to off
             shiftOn = false;
 
-            // Import the layout schemes from file into a JSON Array
+            // If you are ready to take a secondary then
             creatingString = false;
 
             // Initialize the output queue
@@ -73,6 +73,8 @@ class ApplicationState extends Application {
     public void setCreatingString(boolean val) {
         creatingString = val;
     }
+
+    public boolean isCreatingString() {return creatingString;}
 
     // Return the current layout index
     public int getCurrentLayout() {

@@ -2,13 +2,18 @@ package edu.washington.derek.radialkeyboard;
 
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Rect;
 import android.support.v4.view.MotionEventCompat;
+import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.DragEvent;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +25,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import static android.view.DragEvent.ACTION_DRAG_ENTERED;
+import static android.view.DragEvent.ACTION_DRAG_STARTED;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -191,114 +199,198 @@ public class MainActivity extends AppCompatActivity {
         final Button button_nine = (Button)findViewById(R.id.button_nine);
         final Button button_center = (Button)findViewById(R.id.center_button);
 
-        button_one.setOnTouchListener(new View.OnTouchListener() {
+        button_one.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // Button One on touch listener
-                if (!state.getCurrentCharacter().equalsIgnoreCase(button_one.getText().toString())) {
+            public void onClick(View v) {
+                //Insert desired code here
+                if (!state.getCurrentCharacter().equals(button_one.getText().toString())) {
                     state.setCurrentCharacter(button_one.getText().toString());
                 }
-                return false;
+                // If the state layout is less than two (not number) do nothing
+                // If the state layout is two then you should submit to the state on click
+                if (state.getCurrentLayout() ==  2) {
+                    submitText();
+                }
+                Log.i(TAG, "you touched button one");
             }
         });
 
-        button_two.setOnTouchListener(new View.OnTouchListener() {
+        button_two.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // Button One on touch listener
-                if (!state.getCurrentCharacter().equalsIgnoreCase(button_two.getText().toString())) {
+            public void onClick(View v) {
+                //Insert desired code here
+                if (!state.getCurrentCharacter().equals(button_two.getText().toString())) {
                     state.setCurrentCharacter(button_two.getText().toString());
                 }
-                return false;
+                // If the state layout is less than two (not number) do nothing
+                // If the state layout is two then you should submit to the state on click
+                if (state.getCurrentLayout() ==  2) {
+                    submitText();
+                }
+                Log.i(TAG, "you touched button two");
             }
         });
 
-        button_three.setOnTouchListener(new View.OnTouchListener() {
+        button_three.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // Button One on touch listener
-                if (!state.getCurrentCharacter().equalsIgnoreCase(button_three.getText().toString())) {
+            public void onClick(View v) {
+                //Insert desired code here
+                if (!state.getCurrentCharacter().equals(button_three.getText().toString())) {
                     state.setCurrentCharacter(button_three.getText().toString());
                 }
-                return false;
+                // If the state layout is less than two (not number) do nothing
+                // If the state layout is two then you should submit to the state on click
+                if (state.getCurrentLayout() ==  2) {
+                    submitText();
+                }
+                Log.i(TAG, "you touched button three");
             }
         });
 
-        button_four.setOnTouchListener(new View.OnTouchListener() {
+        button_four.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // Button One on touch listener
-                if (!state.getCurrentCharacter().equalsIgnoreCase(button_four.getText().toString())) {
+            public void onClick(View v) {
+                //Insert desired code here
+                if (!state.getCurrentCharacter().equals(button_four.getText().toString())) {
                     state.setCurrentCharacter(button_four.getText().toString());
                 }
-                return false;
+                // If the state layout is less than two (not number) do nothing
+                // If the state layout is two then you should submit to the state on click
+                if (state.getCurrentLayout() ==  2) {
+                    submitText();
+                }
+                Log.i(TAG, "you touched button four");
             }
         });
 
-        button_five.setOnTouchListener(new View.OnTouchListener() {
+        button_five.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // Button One on touch listener
-                if (!state.getCurrentCharacter().equalsIgnoreCase(button_five.getText().toString())) {
+            public void onClick(View v) {
+                //Insert desired code here
+                if (!state.getCurrentCharacter().equals(button_five.getText().toString())) {
                     state.setCurrentCharacter(button_five.getText().toString());
                 }
-                return false;
+                // If the state layout is less than two (not number) do nothing
+                // If the state layout is two then you should submit to the state on click
+                if (state.getCurrentLayout() ==  2) {
+                    submitText();
+                }
+                Log.i(TAG, "you touched button five");
             }
         });
 
-        button_six.setOnTouchListener(new View.OnTouchListener() {
+        button_six.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // Button One on touch listener
-                if (!state.getCurrentCharacter().equalsIgnoreCase(button_six.getText().toString())) {
+            public void onClick(View v) {
+                //Insert desired code here
+                if (!state.getCurrentCharacter().equals(button_six.getText().toString())) {
                     state.setCurrentCharacter(button_six.getText().toString());
                 }
-                return false;
+                // If the state layout is less than two (not number) do nothing
+                // If the state layout is two then you should submit to the state on click
+                if (state.getCurrentLayout() ==  2) {
+                    submitText();
+                }
+                Log.i(TAG, "you touched button six");
             }
         });
 
-        button_seven.setOnTouchListener(new View.OnTouchListener() {
+        button_seven.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // Button One on touch listener
-                if (!state.getCurrentCharacter().equalsIgnoreCase(button_seven.getText().toString())) {
+            public void onClick(View v) {
+                //Insert desired code here
+                if (!state.getCurrentCharacter().equals(button_seven.getText().toString())) {
                     state.setCurrentCharacter(button_seven.getText().toString());
                 }
-                return false;
+                // If the state layout is less than two (not number) do nothing
+                // If the state layout is two then you should submit to the state on click
+                if (state.getCurrentLayout() ==  2) {
+                    submitText();
+                }
+                Log.i(TAG, "you touched button seven");
             }
         });
 
-        button_eight.setOnTouchListener(new View.OnTouchListener() {
+        button_eight.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // Button One on touch listener
-                if (!state.getCurrentCharacter().equalsIgnoreCase(button_eight.getText().toString())) {
+            public void onClick(View v) {
+                //Insert desired code here
+                if (!state.getCurrentCharacter().equals(button_eight.getText().toString())) {
                     state.setCurrentCharacter(button_eight.getText().toString());
                 }
-                return false;
+                // If the state layout is less than two (not number) do nothing
+                // If the state layout is two then you should submit to the state on click
+                if (state.getCurrentLayout() ==  2) {
+                    submitText();
+                }
+                Log.i(TAG, "you touched button eight");
             }
         });
 
-        button_nine.setOnTouchListener(new View.OnTouchListener() {
+        button_nine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Insert desired code here
+                if (!state.getCurrentCharacter().equals(button_nine.getText().toString())) {
+                    state.setCurrentCharacter(button_nine.getText().toString());
+                }
+                // If the state layout is less than two (not number) do nothing
+                // If the state layout is two then you should submit to the state on click
+                if (state.getCurrentLayout() ==  2) {
+                    submitText();
+                }
+                Log.i(TAG, "you touched button nine");
+            }
+        });
+
+        // Enable the touch listener
+        button_center.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                // Button One on touch listener
-                if (!state.getCurrentCharacter().equalsIgnoreCase(button_nine.getText().toString())) {
-                    state.setCurrentCharacter(button_nine.getText().toString());
+                if (state.getCurrentLayout() < 2) {
+                    if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                        View hovered = findViewAtPosition(findViewById(R.id.activityLayout), (int) event.getRawX(), (int) event.getRawY());
+                        if (hovered != null) {
+                            Log.i(TAG, "HOVERED: " + findViewById(hovered.getId()));
+                            hovered.performClick();
+                        } else {
+                            Log.i(TAG, "HOVERED: " + hovered);
+                        }
+                    } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                        // On release the button should do its thing
+                        Log.i(TAG, "Center button released");
+                        state.addCharacter();
+                        String sentence = state.getSentence();
+                        EditText input = (EditText) findViewById(R.id.input_area);
+                        input.setText(sentence);
+                        input.setSelection(sentence.length());
+                    }
                 }
                 return false;
             }
         });
-
+        // Enable the click listener
         button_center.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                state.addCharacter();
-                EditText input = (EditText)findViewById(R.id.input_area);
-                input.setText(state.getSentence());
-                input.setSelection(state.getSentence().length());
+                if (state.getCurrentLayout() == 2) {
+                    if (!state.getCurrentCharacter().equals(button_center.getText().toString())) {
+                        state.setCurrentCharacter(button_center.getText().toString());
+                    }
+                    submitText();
+                }
+                Log.i(TAG, "you touched button center");
             }
         });
+    }
+
+    public void submitText() {
+        ApplicationState state = ApplicationState.getInstance();
+        state.addCharacter();
+        String sentence = state.getSentence();
+        EditText input = (EditText)findViewById(R.id.input_area);
+        input.setText(sentence);
+        input.setSelection(sentence.length());
     }
 
     // Set the text for the buttons
@@ -447,32 +539,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // On touch event for the activity
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        int action = MotionEventCompat.getActionMasked(event);
-
-        switch(action) {
-            case (MotionEvent.ACTION_DOWN) :
-                Log.d(TAG,"Action was DOWN");
-                return true;
-            case (MotionEvent.ACTION_MOVE) :
-                Log.d(TAG,"Action was MOVE");
-                return true;
-            case (MotionEvent.ACTION_UP) :
-                Log.d(TAG,"Action was UP");
-                // System.exit(0);
-                return true;
-            case (MotionEvent.ACTION_CANCEL) :
-                Log.d(TAG,"Action was CANCEL");
-                return true;
-            case (MotionEvent.ACTION_OUTSIDE) :
-                Log.d(TAG,"Movement occurred outside bounds " +
-                        "of current screen element");
-                return true;
-            default :
-                return super.onTouchEvent(event);
+    // Returns the view that is currently being hovered
+    private View findViewAtPosition(View parent, int x, int y) {
+        if (parent instanceof ViewGroup) {
+            ViewGroup viewGroup = (ViewGroup)parent;
+            for (int i=0; i<viewGroup.getChildCount(); i++) {
+                View child = viewGroup.getChildAt(i);
+                View viewAtPosition = findViewAtPosition(child, x, y);
+                if (viewAtPosition != null) {
+                    return viewAtPosition;
+                }
+            }
+            return null;
+        } else {
+            Rect rect = new Rect();
+            parent.getGlobalVisibleRect(rect);
+            if (rect.contains(x, y)) {
+                return parent;
+            } else {
+                return null;
+            }
         }
     }
 
@@ -513,7 +599,5 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         Log.e(TAG, "Keyboard Main Activity has stopped");
     }
-
-
 
 }
