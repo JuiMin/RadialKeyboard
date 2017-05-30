@@ -511,9 +511,7 @@ public class MainActivity extends AppCompatActivity {
                     } else if (event.getAction() == MotionEvent.ACTION_UP) {
                         // On release the button should do its thing
                         Log.i(TAG, "Center button released");
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                            resetButtonColors();
-                        }
+                        resetButtonColors();
                         state.addCharacter();
                         String sentence = state.getSentence();
                         EditText input = (EditText) findViewById(R.id.input_area);
