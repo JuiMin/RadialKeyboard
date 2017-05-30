@@ -67,6 +67,7 @@ class ApplicationState extends Application {
     }
 
     // Set the current layout index to the passed in value
+    // WE need to make the swipe thing
     public void setCurrentLayout(int index) {
         currentLayout = index;
     }
