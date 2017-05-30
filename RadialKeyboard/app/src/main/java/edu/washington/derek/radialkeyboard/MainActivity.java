@@ -2,7 +2,13 @@ package edu.washington.derek.radialkeyboard;
 
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +28,7 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -67,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // This button should toggle the shift
                 state.toggleShift();
-
                 // Update the buttons to reflect that the shift is now on
                 buttonUpdate();
+
             }
         });
 
@@ -95,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 state.deleteCharacter();
                 input.setText(state.getSentence());
                 input.setSelection(state.getSentence().length());
+                state.setCurrentCharacter("");
             }
         });
 
@@ -108,15 +116,13 @@ public class MainActivity extends AppCompatActivity {
                 state.addCharacter();
                 input.setText(state.getSentence());
                 input.setSelection(state.getSentence().length());
+                // Reset the current character
+                state.setCurrentCharacter("");
             }
         });
 
         // Update the buttons with the current layout
         buttonUpdate();
-
-        // Set the functionality for each button
-
-
         Log.i(TAG, "Keyboard Main Activity successfully created");
     }
 
@@ -199,6 +205,8 @@ public class MainActivity extends AppCompatActivity {
         final Button button_nine = (Button)findViewById(R.id.button_nine);
         final Button button_center = (Button)findViewById(R.id.center_button);
 
+        // Set the onclick listeners for each button - the center button will call these
+        // When it detects it is hovering over something
         button_one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -345,6 +353,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Enable the touch listener
         button_center.setOnTouchListener(new View.OnTouchListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (state.getCurrentLayout() < 2) {
@@ -352,18 +361,170 @@ public class MainActivity extends AppCompatActivity {
                         View hovered = findViewAtPosition(findViewById(R.id.activityLayout), (int) event.getRawX(), (int) event.getRawY());
                         if (hovered != null) {
                             Log.i(TAG, "HOVERED: " + findViewById(hovered.getId()));
-                            hovered.performClick();
+                            // You are hovering over something at this point
+
+                            // Drawables for the buttons
+                            Drawable roundButtonLeft = ContextCompat.getDrawable(getApplicationContext(),R.drawable.round_button_left);
+                            Drawable roundButtonRight = ContextCompat.getDrawable(getApplicationContext(),R.drawable.round_button_right);
+
+                            // If it is a button
+                            switch (hovered.getId()) {
+                                case R.id.button_one:
+                                    if (state.getCurrentCharacter().equals("")) {
+                                        // Current state has no letter selected
+                                        // Set button 2 and 9 so they are the secondaries
+                                        TextView secondary_left = (TextView)findViewById(R.id.button_one_left);
+                                        TextView secondary_right = (TextView)findViewById(R.id.button_one_right);
+                                        button_nine.setText(secondary_left.getText());
+                                        button_two.setText(secondary_right.getText());
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                            button_nine.setBackground(roundButtonLeft);
+                                            button_two.setBackground(roundButtonRight);
+                                        }
+                                    }
+                                    hovered.performClick();
+                                case R.id.button_two:
+                                    if (state.getCurrentCharacter().equals("")) {
+                                        // Current state has no letter selected
+                                        // Set button 2 and 9 so they are the secondaries
+                                        TextView secondary_left = (TextView)findViewById(R.id.button_two_left);
+                                        TextView secondary_right = (TextView)findViewById(R.id.button_two_right);
+                                        button_one.setText(secondary_left.getText());
+                                        button_three.setText(secondary_right.getText());
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                            button_one.setBackground(roundButtonLeft);
+                                            button_three.setBackground(roundButtonRight);
+                                        }
+                                    }
+                                    hovered.performClick();
+                                case R.id.button_three:
+                                    if (state.getCurrentCharacter().equals("")) {
+                                        // Current state has no letter selected
+                                        // Set button 2 and 9 so they are the secondaries
+                                        TextView secondary_left = (TextView)findViewById(R.id.button_three_left);
+                                        TextView secondary_right = (TextView)findViewById(R.id.button_three_right);
+                                        button_two.setText(secondary_left.getText());
+                                        button_four.setText(secondary_right.getText());
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                            button_two.setBackground(roundButtonLeft);
+                                            button_four.setBackground(roundButtonRight);
+                                        }
+                                    }
+                                    hovered.performClick();
+                                case R.id.button_four:
+                                    if (state.getCurrentCharacter().equals("")) {
+                                        // Current state has no letter selected
+                                        // Set button 2 and 9 so they are the secondaries
+                                        TextView secondary_left = (TextView)findViewById(R.id.button_four_left);
+                                        TextView secondary_right = (TextView)findViewById(R.id.button_four_right);
+                                        button_three.setText(secondary_left.getText());
+                                        button_five.setText(secondary_right.getText());
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                            button_three.setBackground(roundButtonLeft);
+                                            button_five.setBackground(roundButtonRight);
+                                        }
+                                    }
+                                    hovered.performClick();
+                                case R.id.button_five:
+                                    if (state.getCurrentCharacter().equals("")) {
+                                        // Current state has no letter selected
+                                        // Set button 2 and 9 so they are the secondaries
+                                        TextView secondary_left = (TextView)findViewById(R.id.button_five_left);
+                                        TextView secondary_right = (TextView)findViewById(R.id.button_five_right);
+                                        button_four.setText(secondary_left.getText());
+                                        button_six.setText(secondary_right.getText());
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                            button_four.setBackground(roundButtonLeft);
+                                            button_six.setBackground(roundButtonRight);
+                                        }
+                                    }
+                                    hovered.performClick();
+                                case R.id.button_six:
+                                    if (state.getCurrentCharacter().equals("")) {
+                                        // Current state has no letter selected
+                                        // Set button 2 and 9 so they are the secondaries
+                                        TextView secondary_left = (TextView)findViewById(R.id.button_six_left);
+                                        TextView secondary_right = (TextView)findViewById(R.id.button_six_right);
+                                        button_five.setText(secondary_left.getText());
+                                        button_seven.setText(secondary_right.getText());
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                            button_five.setBackground(roundButtonLeft);
+                                            button_seven.setBackground(roundButtonRight);
+                                        }
+                                    }
+                                    hovered.performClick();
+                                case R.id.button_seven:
+                                    if (state.getCurrentCharacter().equals("")) {
+                                        // Current state has no letter selected
+                                        // Set button 2 and 9 so they are the secondaries
+                                        TextView secondary_left = (TextView)findViewById(R.id.button_seven_left);
+                                        TextView secondary_right = (TextView)findViewById(R.id.button_seven_right);
+                                        button_six.setText(secondary_left.getText());
+                                        button_eight.setText(secondary_right.getText());
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                            button_six.setBackground(roundButtonLeft);
+                                            button_eight.setBackground(roundButtonRight);
+                                        }
+                                    }
+                                    hovered.performClick();
+                                case R.id.button_eight:
+                                    if (state.getCurrentCharacter().equals("")) {
+                                        // Current state has no letter selected
+                                        // Set button 2 and 9 so they are the secondaries
+                                        TextView secondary_left = (TextView)findViewById(R.id.button_eight_left);
+                                        TextView secondary_right = (TextView)findViewById(R.id.button_eight_right);
+                                        button_seven.setText(secondary_left.getText());
+                                        button_nine.setText(secondary_right.getText());
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                            button_seven.setBackground(roundButtonLeft);
+                                            button_nine.setBackground(roundButtonRight);
+                                        }
+                                    }
+                                    hovered.performClick();
+                                case R.id.button_nine:
+                                    if (state.getCurrentCharacter().equals("")) {
+                                        // Current state has no letter selected
+                                        // Set button 2 and 9 so they are the secondaries
+                                        TextView secondary_left = (TextView)findViewById(R.id.button_nine_left);
+                                        TextView secondary_right = (TextView)findViewById(R.id.button_nine_right);
+                                        button_eight.setText(secondary_left.getText());
+                                        button_one.setText(secondary_right.getText());
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                            button_eight.setBackground(roundButtonLeft);
+                                            button_one.setBackground(roundButtonRight);
+                                        }
+                                    }
+                                    hovered.performClick();
+                                case R.id.center_button:
+                                    if (!state.getCurrentCharacter().equals("")) {
+                                        Log.i(TAG, "Im on the center button apparently");
+                                        // Letter has been selected
+                                        // Theoretically you should only be here if you have a letter so commit it
+                                    }
+                            }
+                            EditText input = (EditText)findViewById(R.id.input_area);
+                            input.setText(state.getSentence() + state.getCurrentCharacter());
+                            input.setSelection(state.getSentence().length());
                         } else {
                             Log.i(TAG, "HOVERED: " + hovered);
                         }
                     } else if (event.getAction() == MotionEvent.ACTION_UP) {
                         // On release the button should do its thing
                         Log.i(TAG, "Center button released");
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            resetButtonColors();
+                        }
                         state.addCharacter();
                         String sentence = state.getSentence();
                         EditText input = (EditText) findViewById(R.id.input_area);
                         input.setText(sentence);
                         input.setSelection(sentence.length());
+                        state.setCurrentCharacter("");
+                        try {
+                            setButtons(layout, state.getShiftStatus());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
                 return false;
@@ -382,6 +543,35 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "you touched button center");
             }
         });
+    }
+
+    // Resets the button colors of all buttons
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    public void resetButtonColors() {
+        Button button_one = (Button)findViewById(R.id.button_one);
+        Button button_two = (Button)findViewById(R.id.button_two);
+        Button button_three = (Button)findViewById(R.id.button_three);
+        Button button_four = (Button)findViewById(R.id.button_four);
+        Button button_five = (Button)findViewById(R.id.button_five);
+        Button button_six = (Button)findViewById(R.id.button_six);
+        Button button_seven = (Button)findViewById(R.id.button_seven);
+        Button button_eight = (Button)findViewById(R.id.button_eight);
+        Button button_nine = (Button)findViewById(R.id.button_nine);
+
+        Drawable roundButton = ContextCompat.getDrawable(getApplicationContext(),R.drawable.round_button);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            button_one.setBackground(roundButton);
+            button_two.setBackground(roundButton);
+            button_three.setBackground(roundButton);
+            button_four.setBackground(roundButton);
+            button_five.setBackground(roundButton);
+            button_six.setBackground(roundButton);
+            button_seven.setBackground(roundButton);
+            button_eight.setBackground(roundButton);
+            button_nine.setBackground(roundButton);
+        }
+
+
     }
 
     public void submitText() {

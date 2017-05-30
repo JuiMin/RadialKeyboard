@@ -34,10 +34,6 @@ class ApplicationState extends Application {
     // Holds the inputs in order
     Queue<String> outputs;
 
-    // boolean showing if the input is on
-    // This will be always on for symbols and numbers but if defauled to off during text
-    private boolean creatingString;
-
     // Current Sentence
     private StringBuffer sb;
 
@@ -48,10 +44,9 @@ class ApplicationState extends Application {
         // Check if the instance has been initialized, if it already exists do nothing
         if (getInstance() == null) {
             // Set the layout display to be the default (1 is the english Alphabet)
-            currentLayout = 1;
+            currentLayout = 0;
 
             // set current letter to empty string
-
             currentCharacter = "";
 
             // Initialize the String Buffer
@@ -60,21 +55,11 @@ class ApplicationState extends Application {
             // Default shift to off
             shiftOn = false;
 
-            // If you are ready to take a secondary then
-            creatingString = false;
-
             // Initialize the output queue
             outputs = new LinkedList<String>();
 
         }
     }
-
-    // Set the string creation
-    public void setCreatingString(boolean val) {
-        creatingString = val;
-    }
-
-    public boolean isCreatingString() {return creatingString;}
 
     // Return the current layout index
     public int getCurrentLayout() {
@@ -115,6 +100,7 @@ class ApplicationState extends Application {
     // Submits the current string as the final sentence
     public void submitString() {
         outputs.add(sb.toString());
+        currentCharacter = "";
         sb.setLength(0);
     }
 
