@@ -75,7 +75,6 @@
                 <Button
                     android:id="@+id/button_one"
                     style="@style/LetterButton"
-                    android:text="E"
                     android:layout_alignParentTop="true"
                     android:layout_toLeftOf="@+id/button_two"
                     android:layout_toStartOf="@+id/button_two" />
@@ -83,7 +82,6 @@
                 <Button
                     android:id="@+id/button_two"
                     style="@style/LetterButton"
-                    android:text="A"
                     android:layout_above="@+id/center_button"
                     android:layout_toRightOf="@id/center_button"
                     android:layout_alignBaseline="@id/center_button" />
@@ -91,7 +89,6 @@
                 <Button
                     android:id="@+id/button_three"
                     style="@style/LetterButton"
-                    android:text="R"
                     android:layout_marginTop="5dp"
                     android:layout_below="@+id/button_two"
                     android:layout_alignRight="@+id/button_two"
@@ -100,7 +97,6 @@
                 <Button
                     android:id="@+id/button_five"
                     style="@style/LetterButton"
-                    android:text="I"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_below="@+id/center_button"
@@ -109,7 +105,6 @@
                 <Button
                     android:id="@+id/button_four"
                     style="@style/LetterButton"
-                    android:text="O"
                     android:layout_marginTop="-5dp"
                     android:layout_below="@+id/center_button"
                     android:layout_toRightOf="@id/button_five" />
@@ -117,7 +112,6 @@
                 <Button
                     android:id="@+id/button_six"
                     style="@style/LetterButton"
-                    android:text="T"
                     android:layout_marginTop="-5dp"
                     android:layout_below="@id/center_button"
                     android:layout_toLeftOf="@id/button_five" />
@@ -125,7 +119,6 @@
                 <Button
                     android:id="@+id/button_seven"
                     style="@style/LetterButton"
-                    android:text="N"
                     android:layout_marginTop="5dp"
                     android:layout_below="@+id/button_eight"
                     android:layout_alignLeft="@+id/button_eight"
@@ -134,7 +127,6 @@
                 <Button
                     android:id="@+id/button_eight"
                     style="@style/LetterButton"
-                    android:text="S"
                     android:layout_above="@+id/center_button"
                     android:layout_toLeftOf="@id/center_button"
                     android:layout_alignBaseline="@id/center_button" />
@@ -142,7 +134,6 @@
                 <Button
                     android:id="@+id/button_nine"
                     style="@style/LetterButton"
-                    android:text="L"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/button_eight"
                     android:layout_toEndOf="@+id/button_eight" />
@@ -151,6 +142,7 @@
                     android:id="@+id/button_one_left"
                     style="@style/secondaryLetterLeft"
                     android:text="C"
+                    android:layout_marginRight="-3dp"
                     android:layout_toLeftOf="@id/button_one"/>
 
                 <TextView
@@ -165,14 +157,14 @@
                     android:text="P"
                     style="@style/secondaryLetterRight"
                     android:layout_alignBaseline="@id/button_two"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@id/button_two"/>
 
                 <TextView
                     android:id="@+id/button_two_left"
                     android:text="D"
                     style="@style/secondaryLetterLeft"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="3dp"
                     android:layout_marginLeft="5dp"
                     android:layout_above="@id/button_two_right"
                     android:layout_alignRight="@id/button_two"
@@ -216,7 +208,7 @@
                     android:id="@+id/button_five_left"
                     android:text="F"
                     style="@style/secondaryLetterLeft"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginLeft="-10dp"
                     android:layout_toRightOf="@id/button_five"
                     android:layout_below="@id/button_five" />
@@ -225,8 +217,8 @@
                     android:id="@+id/button_five_right"
                     android:text="Y"
                     style="@style/secondaryLetterRight"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginRight="-12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="-14dp"
                     android:layout_below="@id/button_five"
                     android:layout_toLeftOf="@id/button_five"/>
 
@@ -267,25 +259,27 @@
                     style="@style/secondaryLetterLeft"
                     android:layout_alignBaseline="@id/button_eight"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginRight="-3dp"
                     android:layout_toLeftOf="@id/button_eight"/>
 
                 <TextView
                     android:id="@+id/button_eight_right"
                     android:text="J"
                     style="@style/secondaryLetterRight"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="2dp"
                     android:layout_above="@id/button_eight_left"
                     android:layout_alignLeft="@id/button_eight"/>
 
                 <TextView
                     android:id="@+id/button_nine_left"
                     android:text="Q"
+                    android:layout_marginRight="-3dp"
                     style="@style/secondaryLetterLeft"
                     android:layout_toLeftOf="@id/button_nine" />
 
                 <TextView
                     android:id="@+id/button_nine_right"
-                    android:text="."
+                    android:text=""
                     style="@style/secondaryLetterRight"
                     android:layout_toRightOf="@id/button_nine" />
 

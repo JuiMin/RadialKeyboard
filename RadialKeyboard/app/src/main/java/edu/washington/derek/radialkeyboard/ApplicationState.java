@@ -38,6 +38,9 @@ class ApplicationState extends Application {
     // Current Sentence
     private StringBuffer sb;
 
+    // Current Letter
+    private String currentLetter;
+
     private ApplicationState() {
         // Check if the instance has been initialized, if it already exists do nothing
         if (getInstance() == null) {
@@ -45,7 +48,11 @@ class ApplicationState extends Application {
             // 0 = alphabet
             // 1 = symbols
             // 2 = numbers
-            currentLayout = 2;
+            currentLayout = 0;
+
+            // set current letter to empty string
+
+            currentLetter = "";
 
             // Initialize the String Buffer
             sb = new StringBuffer();
@@ -62,6 +69,11 @@ class ApplicationState extends Application {
         }
     }
 
+    // Set the string creation
+    public void setCreatingString(boolean val) {
+        creatingString = val;
+    }
+
     // Return the current layout index
     public int getCurrentLayout() {
         return currentLayout;
@@ -72,6 +84,7 @@ class ApplicationState extends Application {
         currentLayout = index;
     }
 
+    // Return the shift value
     public boolean getShiftStatus() {
         return shiftOn;
     }
@@ -82,8 +95,12 @@ class ApplicationState extends Application {
     }
 
     // Add a character from the string buffer
-    public void addCharacter(char inputChar) {
-        sb.append(inputChar);
+    public void addCharacter() {
+        sb.append(currentLetter);
+    }
+
+    public void setCurrentCharacter(String current) {
+        currentLetter = current;
     }
 
     // Remove a character from the string buffer
