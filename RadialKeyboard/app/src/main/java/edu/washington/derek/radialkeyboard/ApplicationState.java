@@ -40,6 +40,9 @@ class ApplicationState extends Application {
     // Current Letter
     private String currentCharacter;
 
+    // Cursor location
+    private int cursorLocation;
+
     private ApplicationState() {
         // Check if the instance has been initialized, if it already exists do nothing
         if (getInstance() == null) {
@@ -58,7 +61,15 @@ class ApplicationState extends Application {
             // Initialize the output queue
             outputs = new LinkedList<String>();
 
+            // Set cursor
+            cursorLocation = 0;
+
         }
+    }
+
+    // Set current cursor
+    public void setCursorLocation(int index) {
+        cursorLocation = index;
     }
 
     // Return the current layout index

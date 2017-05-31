@@ -53,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
         // Get the Edit Text so that we can update the text field
         final EditText input = (EditText)findViewById(R.id.input_area);
 
+        // On create, get an instance of the state
+        // Extends application should run on application start so this information should be fine
+        final ApplicationState state = ApplicationState.getInstance();
+
         // Should remove the keyboard without getting rid of the cursor
         input.setOnTouchListener(new View.OnTouchListener() {
 
@@ -63,13 +67,10 @@ public class MainActivity extends AppCompatActivity {
                 if (imm != null) {
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
+                // If no text is selected then the cursor position should be selection start
                 return true;
             }
         });
-
-        // On create, get an instance of the state
-        // Extends application should run on application start so this information should be fine
-        final ApplicationState state = ApplicationState.getInstance();
 
         // Set the button listeners for the corner buttons
         // This button is always going to be the shift button
