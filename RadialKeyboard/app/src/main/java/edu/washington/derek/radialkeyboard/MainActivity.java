@@ -500,13 +500,18 @@ public class MainActivity extends AppCompatActivity {
                                         button_nine.setBackground(roundButtonSelected);
                                     }
                                     hovered.performClick();
-                                case R.id.center_button:
+                                case R.id.invisible_button:
                                     if (!state.getCurrentCharacter().equals("")) {
                                         Log.i(TAG, "Im on the center button apparently");
+                                        Button b = (Button)findViewById(R.id.invisible_button);
+                                        Drawable d = ContextCompat.getDrawable(getApplicationContext(), R.drawable.round_button_selected);
+                                        b.setBackground(d);
                                         // Letter has been selected
                                         // Theoretically you should only be here if you have a letter so commit it
                                     }
                             }
+                            Button b = (Button)findViewById(R.id.invisible_button);
+                            Drawable d = ContextCompat.getDrawable(getApplicationContext(), R.drawable.round_button);
                             EditText input = (EditText)findViewById(R.id.input_area);
                             input.setText(state.getSentence() + state.getCurrentCharacter());
                             input.setSelection(state.getSentence().length());

@@ -66,12 +66,21 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/top_row">
 
+
+                <Button
+                    android:id="@+id/invisible_button"
+                    style="@style/invisible"
+                    android:text=""
+                    android:layout_below="@+id/button_one"
+                    android:layout_centerHorizontal="true" />
+
                 <Button
                     android:id="@+id/center_button"
                     style="@style/CenterButton"
                     android:text=""
                     android:layout_below="@+id/button_one"
                     android:layout_centerHorizontal="true" />
+
 
                 <Button
                     android:id="@+id/button_one"
