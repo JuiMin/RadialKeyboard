@@ -307,7 +307,13 @@
         </RelativeLayout>
     </LinearLayout>
 
-
+    <Button
+        android:id="@+id/outputButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Output File"
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="390dp" />
 
 
 </android.support.constraint.ConstraintLayout>

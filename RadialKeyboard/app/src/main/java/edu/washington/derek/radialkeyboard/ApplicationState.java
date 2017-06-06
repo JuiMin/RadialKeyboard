@@ -1,10 +1,10 @@
 package edu.washington.derek.radialkeyboard;
 
 import android.app.Application;
+import android.content.Context;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -19,9 +19,6 @@ class ApplicationState extends Application {
         return ourInstance;
     }
 
-    // Fields for the Application State
-    private JSONArray keyboardLayouts;
-
     // boolean showing whether shift is on
     private boolean shiftOn;
 
@@ -30,6 +27,8 @@ class ApplicationState extends Application {
     // 1 = symbols
     // 2 = numbers
     private int currentLayout;
+
+    // Selected User
 
     // Holds the inputs in order
     Queue<String> outputs;

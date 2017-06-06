@@ -1,41 +1,33 @@
 package edu.washington.derek.radialkeyboard;
 
-import android.app.Application;
 import android.content.Context;
-import android.graphics.Color;
+
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.DrawableRes;
+import android.os.Environment;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
-import android.view.DragEvent;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
+import java.io.File;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
-import static android.view.DragEvent.ACTION_DRAG_ENTERED;
-import static android.view.DragEvent.ACTION_DRAG_STARTED;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,6 +44,32 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the Edit Text so that we can update the text field
         final EditText input = (EditText)findViewById(R.id.input_area);
+
+        Button outputButton = (Button)findViewById(R.id.outputButton);
+        outputButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String filename = "output.xml";
+                String starter = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n";
+                String textText = "<TextTest version=\"2.7.2\" trials=\"45\" ticks=\"636317330047081832\" seconds=\"63631733004.71\" date=\"Tuesday, May 30, 2017 9:23:24 AM\">\n";
+                if (isExternalStorageWritable() && isExternalStorageReadable()) {
+                    File dir = new File("/sdcard/My Documents");
+                    File file = new File(dir, filename);
+                    try {
+                        FileOutputStream f = new FileOutputStream(file);
+                        f.write(starter.getBytes());
+                        f.write(textText.getBytes());
+                        f.close();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                        Log.i(TAG, "******* File not found. Did you" +
+                                " add a WRITE_EXTERNAL_STORAGE permission to the   manifest?");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
 
         // Should remove the keyboard without getting rid of the cursor
         input.setOnTouchListener(new View.OnTouchListener() {
@@ -155,6 +173,25 @@ public class MainActivity extends AppCompatActivity {
         }
         return json;
 
+    }
+
+    /* Checks if external storage is available for read and write */
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    /* Checks if external storage is available to at least read */
+    public boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+            return true;
+        }
+        return false;
     }
 
     // Update the buttons
