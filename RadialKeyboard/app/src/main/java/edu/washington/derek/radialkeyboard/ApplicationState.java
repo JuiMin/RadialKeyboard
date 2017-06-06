@@ -2,12 +2,10 @@ package edu.washington.derek.radialkeyboard;
 
 import android.app.Application;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Random;
+import java.util.Set;
 
 /**
  * Created by derek on 5/27/17.
@@ -15,6 +13,8 @@ import java.util.Queue;
 
 class ApplicationState extends Application {
     private static final ApplicationState ourInstance = new ApplicationState();
+
+    private static final int TRIALS = 45;
 
     static ApplicationState getInstance() {
         return ourInstance;
@@ -29,13 +29,20 @@ class ApplicationState extends Application {
     // 2 = numbers
     private int currentLayout;
 
-    // Selected User
+    // String[] for potential words
+    private String[] phrases;
 
     // Holds the inputs in order
     Queue<String> outputs;
 
     // Current Sentence
     private StringBuffer sb;
+
+    // Starting phrase for the testing
+    private int startingPhrase;
+
+    // current phrase index
+    private int currentPhraseIndex;
 
     // Current Letter
     private String currentCharacter;
@@ -58,25 +65,38 @@ class ApplicationState extends Application {
             // Initialize the output queue
             outputs = new LinkedList<String>();
 
+            // Initialize the phrases
+            phrases = new String[500];
+
+            // Starting phrase
+            startingPhrase = new Random().nextInt(455 - 0 + 1);
+
+            // Current Phrase
+            currentPhraseIndex = 0;
         }
     }
 
-    public void writeFile() {
-        String filename = "output.xml";
-        String starter = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n";
-        String textText = "<TextTest version=\"2.7.2\" trials=\"45\" ticks=\"636317330047081832\" seconds=\"63631733004.71\" date=\"Tuesday, May 30, 2017 9:23:24 AM\">\n";
-        File dir = new File("/sdcard/My Documents");
-        File file = new File(dir, filename);
-        try {
-            FileOutputStream f = new FileOutputStream(file);
-            f.write(starter.getBytes());
-            f.write(textText.getBytes());
-            f.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+    public void incrementCurrentPhrase() {
+        ++currentPhraseIndex;
+    }
+
+    public int getCurrentPhraseIndex() {
+        return currentPhraseIndex;
+    }
+
+    // Set the phrases with the input stream from the file
+    public void setPhrases(Set<String> input) {
+        int index = 0;
+        for (String item: input) {
+            phrases[index] = item;
+            ++index;
         }
+    }
+
+    // Get the list of phrases
+    public String getCurrentPhrase() {
+        return phrases[currentPhraseIndex + startingPhrase];
     }
 
     // Return the current layout index
@@ -121,6 +141,15 @@ class ApplicationState extends Application {
         outputs.add(sb.toString());
         currentCharacter = "";
         sb.setLength(0);
+    }
+
+    public Queue<String> allTrials() {
+        return outputs;
+    }
+
+    // Add this to write to file queue
+    public void enqueueString(String x) {
+        outputs.add(x);
     }
 
     // Get the sentence made by the string buffer

@@ -22,12 +22,19 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.File;
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
     // Swiping Constants
     private float x1,x2;
     static final int MIN_DISTANCE = 230;
+
+    // Set up constants for the ticks
+    private static final long TICKS_AT_EPOCH = 621355968000000000L;
+    private static final long TICKS_PER_MILLISECOND = 10000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +60,69 @@ public class MainActivity extends AppCompatActivity {
         // Get the Edit Text so that we can update the text field
         final EditText input = (EditText)findViewById(R.id.input_area);
 
+        // Add the phrases to the state
+        Set<String> phrases = new HashSet<String>();
+        try {
+            InputStream is = getAssets().open("phrases.txt");
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                phrases.add(line);
+            }
+            state.setPhrases(phrases);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        // Generate the beginning of the output file
+        // Starter for the file
+        state.enqueueString("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n");
+        // Generate the trials
+        // Get date
+        String simpleDate = new SimpleDateFormat("EEEE, MMM dd, yyy hh:mm:ss a").format(new Date());
+
+        // Get date in ticks
+        long tick = System.currentTimeMillis()*TICKS_PER_MILLISECOND + TICKS_AT_EPOCH;
+
+        // Get date in seconds
+        long seconds = Math.round(tick/ 10000000);
+
+        state.enqueueString("<TextTest version=\"2.7.2\" trials=\"45\" ticks=\"" + tick + "\" seconds=\"" + seconds + "\" date=\"" + simpleDate + "\">\n");
+
+
         Button outputButton = (Button)findViewById(R.id.outputButton);
         outputButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isExternalStorageWritable() && isExternalStorageReadable()) {
-                    state.writeFile();
+                    // This should just write the entire thing to file for every trial
+                    String filename = "output.xml";
+                    File dir = new File("/sdcard/My Documents");
+                    File file = new File(dir, filename);
+                    try {
+                        FileOutputStream f = new FileOutputStream(file);
+                        // For each thing in the state's output queue, write to file
+
+
+                        f.close();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+            }
+        });
+
+        Button startButton = (Button)findViewById(R.id.startTrials);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView trialNum = (TextView)findViewById(R.id.trialCounter);
+                trialNum.setText("Trial Number: " + (state.getCurrentPhraseIndex() + 1) + " of 45");
+                TextView trialText = (TextView)findViewById(R.id.displayTarget);
+                trialText.setText(state.getCurrentPhrase());
             }
         });
 

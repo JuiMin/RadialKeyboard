@@ -18,7 +18,7 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="74dp"
+        android:layout_marginTop="10dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -326,7 +326,7 @@
             tools:layout_editor_absoluteX="16dp" />
 
         <Button
-            android:id="@+id/start_trails"
+            android:id="@+id/startTrials"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="START"
