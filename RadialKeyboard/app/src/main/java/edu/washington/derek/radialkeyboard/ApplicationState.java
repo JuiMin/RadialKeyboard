@@ -1,10 +1,11 @@
 package edu.washington.derek.radialkeyboard;
 
 import android.app.Application;
-import android.content.Context;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -57,6 +58,24 @@ class ApplicationState extends Application {
             // Initialize the output queue
             outputs = new LinkedList<String>();
 
+        }
+    }
+
+    public void writeFile() {
+        String filename = "output.xml";
+        String starter = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n";
+        String textText = "<TextTest version=\"2.7.2\" trials=\"45\" ticks=\"636317330047081832\" seconds=\"63631733004.71\" date=\"Tuesday, May 30, 2017 9:23:24 AM\">\n";
+        File dir = new File("/sdcard/My Documents");
+        File file = new File(dir, filename);
+        try {
+            FileOutputStream f = new FileOutputStream(file);
+            f.write(starter.getBytes());
+            f.write(textText.getBytes());
+            f.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

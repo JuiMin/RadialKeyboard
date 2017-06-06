@@ -42,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // On create, get an instance of the state
+        // Extends application should run on application start so this information should be fine
+        final ApplicationState state = ApplicationState.getInstance();
+
         // Get the Edit Text so that we can update the text field
         final EditText input = (EditText)findViewById(R.id.input_area);
 
@@ -49,24 +53,8 @@ public class MainActivity extends AppCompatActivity {
         outputButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String filename = "output.xml";
-                String starter = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n";
-                String textText = "<TextTest version=\"2.7.2\" trials=\"45\" ticks=\"636317330047081832\" seconds=\"63631733004.71\" date=\"Tuesday, May 30, 2017 9:23:24 AM\">\n";
                 if (isExternalStorageWritable() && isExternalStorageReadable()) {
-                    File dir = new File("/sdcard/My Documents");
-                    File file = new File(dir, filename);
-                    try {
-                        FileOutputStream f = new FileOutputStream(file);
-                        f.write(starter.getBytes());
-                        f.write(textText.getBytes());
-                        f.close();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                        Log.i(TAG, "******* File not found. Did you" +
-                                " add a WRITE_EXTERNAL_STORAGE permission to the   manifest?");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    state.writeFile();
                 }
             }
         });
@@ -84,10 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-        // On create, get an instance of the state
-        // Extends application should run on application start so this information should be fine
-        final ApplicationState state = ApplicationState.getInstance();
 
         // Set the button listeners for the corner buttons
         // This button is always going to be the shift button

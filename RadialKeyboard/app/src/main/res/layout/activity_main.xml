@@ -305,15 +305,41 @@
                     android:layout_alignParentBottom="true" />
             </RelativeLayout>
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/trialCounter"
+            android:text="Trial Number: "
+            android:layout_width="308dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteY="284dp"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <TextView
+            android:id="@+id/displayTarget"
+            android:text="helo asjd;flkasdjfalksdjfa;lksdfjalsk;dj;alksdjfalk;sdf"
+            android:layout_width="308dp"
+            android:layout_marginBottom="50dp"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteY="284dp"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <Button
+            android:id="@+id/start_trails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="START"
+            tools:layout_editor_absoluteY="347dp"
+            tools:layout_editor_absoluteX="117dp" />
+
+        <Button
+            android:id="@+id/outputButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Output File"
+            tools:layout_editor_absoluteX="107dp"
+            tools:layout_editor_absoluteY="399dp" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/outputButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Output File"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="390dp" />
-
-
 </android.support.constraint.ConstraintLayout>
