@@ -309,7 +309,7 @@
         <TextView
             android:id="@+id/trialCounter"
             android:text="Trial Number: "
-            android:layout_width="308dp"
+            android:layout_width="match_parent"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="25dp"
             android:layout_height="wrap_content"
@@ -319,7 +319,7 @@
         <TextView
             android:id="@+id/displayTarget"
             android:text=""
-            android:layout_width="308dp"
+            android:layout_width="150dp"
             android:layout_marginBottom="25dp"
             android:layout_height="wrap_content"
             tools:layout_editor_absoluteY="284dp"
@@ -337,7 +337,7 @@
             android:id="@+id/outputButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="5dp"
             android:text="Output File"
             tools:layout_editor_absoluteX="107dp"
             tools:layout_editor_absoluteY="399dp" />

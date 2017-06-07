@@ -96,12 +96,18 @@ class ApplicationState extends Application {
         // Get date in seconds
         long seconds = tick/ 100000;
         String sec = Long.toString(seconds / 100) + "." + (seconds % 100);
-        entries.add("<Entry char=\"" + value + "\" value=\"" + Character.getNumericValue(value) + "\" ticks=\"" + tick + "\" seconds=\"" + sec + "\" />");
+        entries.add("<Entry char=\"" + value + "\" value=\"" + value + "\" ticks=\"" + tick + "\" seconds=\"" + sec + "\"/>");
+    }
+
+    public void resetEntries() {
+        entries = new LinkedList<>();
     }
 
     public void incrementCurrentPhrase() {
         ++currentPhraseIndex;
     }
+
+    public void setCurrentPhrase(int x) { currentPhraseIndex = x;}
 
     public int getCurrentPhraseIndex() {
         return currentPhraseIndex;
@@ -144,7 +150,15 @@ class ApplicationState extends Application {
 
     // Add a character from the string buffer
     public void addCharacter() {
-        sb.append(currentCharacter);
+        // Add entry to the UI
+        if (currentCharacter.length() > 0) {
+            addEntry(currentCharacter.charAt(0));
+            sb.append(currentCharacter);
+        }
+    }
+
+    public void finisher() {
+        outputs.add("</TextTest>");
     }
 
     public void setCurrentCharacter(String current) {
@@ -155,20 +169,28 @@ class ApplicationState extends Application {
 
     // Remove a character from the string buffer
     public void deleteCharacter() {
+        // Update UI
         sb.setLength(Math.max(sb.length() - 1, 0));
+        // Enter an entry into the entries
+        long tick = System.currentTimeMillis()*TICKS_PER_MILLISECOND + TICKS_AT_EPOCH;
+        // Get date in seconds
+        long seconds = tick/ 100000;
+        String sec = Long.toString(seconds / 100) + "." + (seconds % 100);
+        entries.add("<Entry char=\"&#8;\" value=\"8\" ticks=\"" + tick + "\" seconds=\"" + sec + "\"/>");
     }
 
     // Submits the current string as the final sentence
     public void submitString() {
-        outputs.add(sb.toString());
-        currentCharacter = "";
+        outputs.add("<Trial number=\"" + (getCurrentPhraseIndex() + 1) + "\" testing=\"false\" entries=\"" + entries.size() + "\">");
+        outputs.add("<Presented>" + getCurrentPhrase() + "</Presented>");
+        for (String entry: entries) {
+            outputs.add(entry);
+        }
+        outputs.add("<Transcrbed>" + sb.toString() + "</Transcribed>");
+        outputs.add("</Trial>");
+        // Reset the trial
         sb.setLength(0);
     }
-
-    public Queue<String> allTrials() {
-        return outputs;
-    }
-
     // Add this to write to file queue
     public void enqueueString(String x) {
         outputs.add(x);
@@ -177,5 +199,9 @@ class ApplicationState extends Application {
     // Get the sentence made by the string buffer
     public String getSentence() {
         return sb.toString();
+    }
+
+    public Queue<String> getOutputs() {
+        return outputs;
     }
 }

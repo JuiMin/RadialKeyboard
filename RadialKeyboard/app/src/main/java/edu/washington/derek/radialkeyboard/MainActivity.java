@@ -29,11 +29,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Queue;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
@@ -105,8 +104,11 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         FileOutputStream f = new FileOutputStream(file);
                         // For each thing in the state's output queue, write to file
-
-
+                        state.finisher();
+                        Queue<String> outputs = state.getOutputs();
+                        while (outputs.isEmpty() == false) {
+                            f.write((outputs.remove() + "\n").getBytes());
+                        }
                         f.close();
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -117,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button startButton = (Button)findViewById(R.id.startTrials);
+        final Button startButton = (Button)findViewById(R.id.startTrials);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,8 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 trialNum.setText("Trial Number: " + (state.getCurrentPhraseIndex() + 1) + " of 45");
                 TextView trialText = (TextView)findViewById(R.id.displayTarget);
                 trialText.setText(state.getCurrentPhrase());
-                // Append trial tag to the output
-                state.enqueueString("<Trial number=\"" + (state.getCurrentPhraseIndex() + 1) + "\" testing=\"false\" entries=\"" + state.getEntries() + "\"");
+                startButton.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -155,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
                 state.toggleShift();
                 // Update the buttons to reflect that the shift is now on
                 buttonUpdate();
-
             }
         });
 
@@ -165,10 +165,34 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Enter/Submit the sentence
-                state.submitString();
+
+                // Increment the phrase
+                if (state.getCurrentPhraseIndex() == 44) {
+                    // You are at the end of the trials
+                    state.submitString();
+                    state.setCurrentPhrase(0);
+                    startButton.setVisibility(View.VISIBLE);
+                    // Alter the view
+                    TextView trialNum = (TextView)findViewById(R.id.trialCounter);
+                    trialNum.setText("Trial Number: ");
+                    TextView trialText = (TextView)findViewById(R.id.displayTarget);
+                    trialText.setText("");
+
+                } else if (startButton.getVisibility() == View.INVISIBLE) {
+                    state.submitString();
+                    // Next statement
+                    state.incrementCurrentPhrase();
+                    // Alter the view
+                    TextView trialNum = (TextView)findViewById(R.id.trialCounter);
+                    trialNum.setText("Trial Number: " + (state.getCurrentPhraseIndex() + 1) + " of 45");
+                    TextView trialText = (TextView)findViewById(R.id.displayTarget);
+                    trialText.setText(state.getCurrentPhrase());
+                }
+
                 // The string buffer should have been reset so we can update the edit text
                 input.setText(state.getSentence());
                 input.setSelection(state.getSentence().length());
+                state.resetEntries();
             }
         });
 
