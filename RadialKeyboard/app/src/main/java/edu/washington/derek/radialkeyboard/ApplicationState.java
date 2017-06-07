@@ -96,7 +96,7 @@ class ApplicationState extends Application {
         // Get date in seconds
         long seconds = tick/ 100000;
         String sec = Long.toString(seconds / 100) + "." + (seconds % 100);
-        entries.add("<Entry char=\"" + value + "\" value=\"" + value + "\" ticks=\"" + tick + "\" seconds=\"" + sec + "\"/>");
+        entries.add("<Entry char=\"" + value + "\" value=\"" + Character.getNumericValue(value) + "\" ticks=\"" + tick + "\" seconds=\"" + sec + "\"/>");
     }
 
     public void resetEntries() {
@@ -186,7 +186,7 @@ class ApplicationState extends Application {
         for (String entry: entries) {
             outputs.add(entry);
         }
-        outputs.add("<Transcrbed>" + sb.toString() + "</Transcribed>");
+        outputs.add("<Transcribed>" + sb.toString() + "</Transcribed>");
         outputs.add("</Trial>");
         // Reset the trial
         sb.setLength(0);
