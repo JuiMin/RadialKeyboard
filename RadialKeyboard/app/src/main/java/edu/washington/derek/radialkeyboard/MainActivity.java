@@ -86,9 +86,11 @@ public class MainActivity extends AppCompatActivity {
         long tick = System.currentTimeMillis()*TICKS_PER_MILLISECOND + TICKS_AT_EPOCH;
 
         // Get date in seconds
-        long seconds = Math.round(tick/ 10000000);
+        long seconds = tick/ 100000;
+        String sec = Long.toString(seconds / 100) + "." + (seconds % 100);
 
-        state.enqueueString("<TextTest version=\"2.7.2\" trials=\"45\" ticks=\"" + tick + "\" seconds=\"" + seconds + "\" date=\"" + simpleDate + "\">\n");
+        // Stick in the test version
+        state.enqueueString("<TextTest version=\"2.7.2\" trials=\"45\" ticks=\"" + tick + "\" seconds=\"" + sec + "\" date=\"" + simpleDate + "\">\n");
 
 
         Button outputButton = (Button)findViewById(R.id.outputButton);
@@ -119,10 +121,13 @@ public class MainActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Setup the first trial
                 TextView trialNum = (TextView)findViewById(R.id.trialCounter);
                 trialNum.setText("Trial Number: " + (state.getCurrentPhraseIndex() + 1) + " of 45");
                 TextView trialText = (TextView)findViewById(R.id.displayTarget);
                 trialText.setText(state.getCurrentPhrase());
+                // Append trial tag to the output
+                state.enqueueString("<Trial number=\"" + (state.getCurrentPhraseIndex() + 1) + "\" testing=\"false\" entries=\"" + state.getEntries() + "\"");
             }
         });
 

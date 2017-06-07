@@ -16,6 +16,10 @@ class ApplicationState extends Application {
 
     private static final int TRIALS = 45;
 
+    // Set up constants for the ticks
+    private static final long TICKS_AT_EPOCH = 621355968000000000L;
+    private static final long TICKS_PER_MILLISECOND = 10000;
+
     static ApplicationState getInstance() {
         return ourInstance;
     }
@@ -43,6 +47,9 @@ class ApplicationState extends Application {
 
     // current phrase index
     private int currentPhraseIndex;
+
+    // current trial entries counter
+    private Queue<String> entries;
 
     // Current Letter
     private String currentCharacter;
@@ -73,9 +80,24 @@ class ApplicationState extends Application {
 
             // Current Phrase
             currentPhraseIndex = 0;
+
+            // set entries to zero
+            entries = new LinkedList<String>();
         }
     }
 
+    public Queue<String> getEntries() {
+        return entries;
+    }
+
+    public void addEntry(char value) {
+        // Get date in ticks
+        long tick = System.currentTimeMillis()*TICKS_PER_MILLISECOND + TICKS_AT_EPOCH;
+        // Get date in seconds
+        long seconds = tick/ 100000;
+        String sec = Long.toString(seconds / 100) + "." + (seconds % 100);
+        entries.add("<Entry char=\"" + value + "\" value=\"" + Character.getNumericValue(value) + "\" ticks=\"" + tick + "\" seconds=\"" + sec + "\" />");
+    }
 
     public void incrementCurrentPhrase() {
         ++currentPhraseIndex;
