@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         state.enqueueString("<TextTest version=\"2.7.2\" trials=\"45\" ticks=\"" + tick + "\" seconds=\"" + sec + "\" date=\"" + simpleDate + "\">\n");
 
 
-        Button outputButton = (Button)findViewById(R.id.outputButton);
+        final Button outputButton = (Button)findViewById(R.id.outputButton);
         outputButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                             f.write((outputs.remove() + "\n").getBytes());
                         }
                         f.close();
+                        outputButton.setVisibility(View.INVISIBLE);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
