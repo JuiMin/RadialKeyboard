@@ -2,15 +2,6 @@
 
 ## INFO 463 Project
 
-### Contributors
-#### Designers
-- Aisha Toulegenova
-- Derek Wang
-- Sybil Wang
-
-#### Developers
-- Derek Wang
-
 ### Description
 This keyboard was designed for devices the size of the apple watch (~42 mm) utilizing touch screen capabilities. The prototype was coded in Java utilizing Android Studio to generate an Android Application which simulates the desired functionality of the keyboard.
 
@@ -53,6 +44,15 @@ slowdown towards the beginning of each test while the user attempted to figure o
 
 ### Conclusion
 The combination of these issues might outweigh the eventual usefulness of this system if not solved because users would avoid using a frustrating system. However, for an experienced user the design can be incredibly fast as a method of text input on a small device. Whether or not someone would want to use it considering its steep learning curve is a further design challenge that this project will need to address.
+
+### Contributors
+#### Designers
+- Aisha Toulegenova
+- Derek Wang
+- Sybil Wang
+
+#### Developers
+- Derek Wang
 
 ### Afterwards
 Design work done for INFO 463 (Inputs and Interactions) at the Univeristy of Washington
