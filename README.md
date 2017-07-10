@@ -20,6 +20,7 @@ The design goal for this application was to generate a system that would be fast
 keyboard. This input technique would be used on devices similar to the Apple Watch or Android Watches where the screens are
 rectangular and too small for traditional input systems.
 
+### Design Summary
 We examined projects like ZoomBoard and tried to generate a system that would be engaging and fast to use once learned. After some
 ideation we structured our design in a radial fashion because it equalized the distance between all keys. This minimized the issue
 of need to access two keys consecutively but having them be on the opposite ends of a long keyboard layout.
@@ -35,6 +36,9 @@ to raise their finger. Raising one's finger adds more time while the finger coul
 The layout of the keyboard also went through various versions, with the two main choices being alphabetical lettering arranged
 in a clockwise fashion or a letter frequency prioritized version where the letters most used in the english language were arranged
 towards the center.
+
+Symbol keys and numerical keys can be accessed by swiping left or right. This system scrolls through the three different keyboards
+which all operate on the same layout. The pages also wrap around so you can continuously scroll to access each page if desired.
 
 ### Testing
 We had various users test the system by entering in a collection of sentences from a bank of inputs. The users were able to play
