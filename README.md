@@ -1,6 +1,6 @@
 # RadialKeyboard
 
-## INFO 463 Project
+## INFO 463 Research Project
 
 ### Description
 This keyboard was designed for devices the size of the apple watch (~42 mm) utilizing touch screen capabilities. The prototype was coded in Java utilizing Android Studio to generate an Android Application which simulates the desired functionality of the keyboard.
